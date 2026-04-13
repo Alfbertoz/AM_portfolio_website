@@ -7,1019 +7,272 @@
 <meta name="description" content="UK-based creative generalist specialising in branding, video production, web design, and game development. Available for freelance and contract work.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,800;0,9..144,900;1,9..144,400;1,9..144,700&display=swap" rel="stylesheet">
 <style>
-/* ============================================
-   ALAN MAUDLIN – PORTFOLIO
-   Edit project data in the <script> section
-   at the bottom of this file.
-   ============================================ */
-
 :root {
-  --bg:         #0e0e10;
-  --bg-raised:  #18181c;
-  --bg-card:    #1e1e24;
-  --surface:    #26262e;
-  --border:     #2e2e38;
-  --text:       #e8e6e1;
-  --text-dim:   #8a8890;
-  --text-faint: #5c5b63;
-  --accent:     #d4654a;
-  --accent-glow: rgba(212,101,74,0.15);
-  --accent-hover:#e07a60;
-  --cream:      #f0ede6;
-  --radius:     10px;
-  --radius-lg:  16px;
-  --font-display: 'Plus Jakarta Sans', sans-serif;
-  --font-body:    'Outfit', sans-serif;
-  --max-w:      1200px;
-  --nav-h:      72px;
+  --bg:#f5f0e8;--bg-warm:#ece5d8;--bg-card:#ffffff;--ink:#1a1a2e;--ink-soft:#3d3d56;
+  --ink-muted:#7a7a8e;--ink-faint:#b0afc0;--pop:#2d4be6;--pop-light:#e8ecfd;
+  --pop-hover:#1a35c9;--pop-glow:rgba(45,75,230,0.12);--mint:#3ecfa5;--coral:#e85d4a;
+  --butter:#f2c744;--radius:12px;--radius-lg:20px;
+  --font-display:'Fraunces',serif;--font-body:'Plus Jakarta Sans',sans-serif;
+  --max-w:1180px;--nav-h:72px;
 }
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:var(--nav-h)}
+body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--pop);color:white}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:0.028;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:250px}
 
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);background:rgba(245,240,232,0.88);backdrop-filter:blur(16px) saturate(1.3);-webkit-backdrop-filter:blur(16px) saturate(1.3);border-bottom:1.5px solid rgba(26,26,46,0.06)}
+.nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 2rem;height:100%;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--font-display);font-weight:900;font-size:1.3rem;letter-spacing:-0.03em;color:var(--ink)}
+.nav-logo .dot{color:var(--pop)}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{font-size:0.85rem;font-weight:600;color:var(--ink-muted);transition:color 0.25s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{background:var(--pop)!important;color:white!important;padding:0.55rem 1.35rem;border-radius:10px;font-weight:700!important;font-size:0.82rem!important;transition:all 0.25s!important;box-shadow:0 2px 12px var(--pop-glow)}
+.nav-cta:hover{background:var(--pop-hover)!important;transform:translateY(-1px);box-shadow:0 6px 24px rgba(45,75,230,0.2)!important}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;width:28px;height:20px;position:relative;z-index:10}
+.nav-toggle span{display:block;width:100%;height:2px;background:var(--ink);position:absolute;left:0;transition:all 0.3s;border-radius:2px}
+.nav-toggle span:nth-child(1){top:0}.nav-toggle span:nth-child(2){top:9px}.nav-toggle span:nth-child(3){top:18px}
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: var(--nav-h);
-}
+.hero{min-height:100vh;display:flex;align-items:center;padding:calc(var(--nav-h) + 3rem) 2rem 4rem;position:relative;overflow:hidden}
+.hero-blob{position:absolute;border-radius:50%;pointer-events:none;filter:blur(80px);opacity:0.18}
+.hero-blob-1{width:500px;height:500px;top:-100px;right:-100px;background:var(--pop)}
+.hero-blob-2{width:350px;height:350px;bottom:-50px;left:-80px;background:var(--mint)}
+.hero-blob-3{width:250px;height:250px;top:40%;right:20%;background:var(--butter);opacity:0.12}
+.hero-inner{max-width:var(--max-w);margin:0 auto;width:100%;display:grid;grid-template-columns:1.15fr 0.85fr;gap:4rem;align-items:center;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:var(--pop-light);border:1.5px solid rgba(45,75,230,0.15);padding:0.4rem 1rem;border-radius:100px;font-size:0.75rem;font-weight:700;color:var(--pop);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:1.75rem}
+.hero-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--pop);animation:pulse 2.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.hero h1{font-family:var(--font-display);font-weight:900;font-size:clamp(2.6rem,5.5vw,4rem);line-height:1.08;letter-spacing:-0.035em;color:var(--ink);margin-bottom:1.5rem}
+.hero h1 em{font-style:italic;font-weight:700;color:var(--pop)}
+.hero-sub{font-size:1.08rem;color:var(--ink-muted);max-width:480px;line-height:1.75;margin-bottom:2.25rem}
+.hero-actions{display:flex;gap:0.85rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.85rem 1.85rem;border-radius:12px;font-family:var(--font-body);font-weight:700;font-size:0.9rem;cursor:pointer;border:none;transition:all 0.3s}
+.btn-primary{background:var(--pop);color:white;box-shadow:0 2px 16px var(--pop-glow)}
+.btn-primary:hover{background:var(--pop-hover);transform:translateY(-2px);box-shadow:0 8px 32px rgba(45,75,230,0.22)}
+.btn-ghost{background:transparent;color:var(--ink);border:2px solid rgba(26,26,46,0.12)}
+.btn-ghost:hover{border-color:var(--ink-muted);transform:translateY(-2px)}
 
-body {
-  font-family: var(--font-body);
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
+.hero-visual{position:relative;height:420px}
+.hero-card{position:absolute;border-radius:var(--radius-lg);overflow:hidden;box-shadow:0 8px 40px rgba(26,26,46,0.1);border:2px solid rgba(255,255,255,0.7);transition:transform 0.5s cubic-bezier(0.23,1,0.32,1),box-shadow 0.4s}
+.hero-card:hover{transform:translateY(-8px) rotate(0deg)!important;box-shadow:0 16px 60px rgba(26,26,46,0.15);z-index:10!important}
+.hero-card img{width:100%;height:100%;object-fit:cover}
+.hero-card-1{width:280px;height:180px;top:20px;left:10px;transform:rotate(-3deg);z-index:3}
+.hero-card-2{width:260px;height:165px;top:100px;right:0;transform:rotate(2.5deg);z-index:2}
+.hero-card-3{width:240px;height:155px;bottom:20px;left:40px;transform:rotate(-1.5deg);z-index:1}
+.hero-card-tag{position:absolute;bottom:10px;left:10px;padding:0.25rem 0.7rem;border-radius:6px;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:white}
+.tag-video{background:var(--coral)}.tag-game{background:var(--mint)}.tag-brand{background:var(--pop)}
 
-::selection { background: var(--accent); color: white; }
+.hero-clients{margin-top:3.5rem;padding-top:2rem;border-top:1.5px solid rgba(26,26,46,0.06);grid-column:1/-1}
+.hero-clients-label{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.16em;color:var(--ink-faint);font-weight:700;margin-bottom:0.85rem}
+.hero-clients-list{display:flex;gap:2.5rem;flex-wrap:wrap;align-items:center}
+.hero-clients-list span{font-family:var(--font-display);font-weight:800;font-size:1.05rem;color:var(--ink);opacity:0.2;transition:opacity 0.3s}
+.hero-clients-list span:hover{opacity:0.5}
 
-a { color: inherit; text-decoration: none; }
+.section{padding:6rem 2rem}.section-inner{max-width:var(--max-w);margin:0 auto}
+.section-header{margin-bottom:3rem}
+.section-label{font-family:var(--font-body);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.18em;font-weight:700;color:var(--pop);margin-bottom:0.6rem;display:flex;align-items:center;gap:0.6rem}
+.section-label::before{content:'';width:20px;height:3px;background:var(--pop);border-radius:2px}
+.section-title{font-family:var(--font-display);font-weight:900;font-size:clamp(1.8rem,3.5vw,2.5rem);letter-spacing:-0.03em;color:var(--ink);line-height:1.15}
+.section-desc{font-size:1rem;color:var(--ink-muted);max-width:500px;line-height:1.7;margin-top:0.6rem}
 
-img { display: block; max-width: 100%; }
+.work-section{background:var(--bg-warm)}
+.work-filters{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:2.25rem}
+.filter-btn{background:var(--bg-card);border:1.5px solid rgba(26,26,46,0.08);color:var(--ink-muted);padding:0.45rem 1.15rem;border-radius:100px;font-family:var(--font-body);font-size:0.8rem;font-weight:600;cursor:pointer;transition:all 0.25s;box-shadow:0 1px 3px rgba(26,26,46,0.04)}
+.filter-btn:hover{border-color:var(--pop);color:var(--pop)}
+.filter-btn.active{background:var(--pop);border-color:var(--pop);color:white;box-shadow:0 2px 12px var(--pop-glow)}
 
-/* ── NAV ── */
-.nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  height: var(--nav-h);
-  background: rgba(14,14,16,0.85);
-  backdrop-filter: blur(20px) saturate(1.4);
-  -webkit-backdrop-filter: blur(20px) saturate(1.4);
-  border-bottom: 1px solid var(--border);
-  transition: background 0.3s;
-}
-.nav-inner {
-  max-width: var(--max-w); margin: 0 auto;
-  padding: 0 2rem; height: 100%;
-  display: flex; align-items: center; justify-content: space-between;
-}
-.nav-logo {
-  font-family: var(--font-display);
-  font-weight: 800; font-size: 1.15rem;
-  letter-spacing: -0.03em; color: var(--cream);
-}
-.nav-logo span { color: var(--accent); }
-.nav-links { display: flex; align-items: center; gap: 2.25rem; }
-.nav-links a {
-  font-size: 0.85rem; font-weight: 500;
-  color: var(--text-dim); letter-spacing: 0.01em;
-  transition: color 0.25s; position: relative;
-}
-.nav-links a::after {
-  content: ''; position: absolute; bottom: -4px; left: 0;
-  width: 0; height: 2px; background: var(--accent);
-  transition: width 0.3s cubic-bezier(0.23,1,0.32,1);
-}
-.nav-links a:hover { color: var(--cream); }
-.nav-links a:hover::after { width: 100%; }
-.nav-cta {
-  background: var(--accent) !important; color: white !important;
-  padding: 0.55rem 1.35rem; border-radius: 8px;
-  font-weight: 600 !important; font-size: 0.82rem !important;
-  letter-spacing: 0.02em;
-  transition: background 0.25s, transform 0.25s, box-shadow 0.25s !important;
-  box-shadow: 0 0 0 0 var(--accent-glow);
-}
-.nav-cta::after { display: none !important; }
-.nav-cta:hover {
-  background: var(--accent-hover) !important;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 20px var(--accent-glow) !important;
-}
+.work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.work-card{position:relative;border-radius:var(--radius-lg);overflow:hidden;cursor:pointer;background:var(--bg-card);border:1.5px solid rgba(26,26,46,0.06);transition:transform 0.4s cubic-bezier(0.23,1,0.32,1),box-shadow 0.4s,border-color 0.3s;box-shadow:0 2px 8px rgba(26,26,46,0.04)}
+.work-card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(26,26,46,0.1);border-color:rgba(45,75,230,0.2)}
+.work-card-img{width:100%;aspect-ratio:16/10;object-fit:cover;border-bottom:1.5px solid rgba(26,26,46,0.04)}
+.work-card-body{padding:1.25rem 1.35rem 1.35rem}
+.work-card-cats{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:0.5rem}
+.work-card-cat-tag{font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:0.2rem 0.55rem;border-radius:5px;color:white}
+.cat-Video{background:var(--coral)}.cat-Branding{background:var(--pop)}.cat-Web-Design{background:#8b5cf6}.cat-Game-Development{background:var(--mint);color:var(--ink)}.cat-Photography{background:#f59e0b}.cat-Documentation{background:var(--ink-muted)}
+.work-card-title{font-family:var(--font-display);font-weight:800;font-size:1.05rem;color:var(--ink);line-height:1.25;margin-bottom:0.3rem;letter-spacing:-0.01em}
+.work-card-desc{font-size:0.82rem;color:var(--ink-muted);line-height:1.5}
+.work-card-arrow{position:absolute;top:1rem;right:1rem;width:32px;height:32px;border-radius:50%;background:white;box-shadow:0 2px 8px rgba(26,26,46,0.1);display:flex;align-items:center;justify-content:center;opacity:0;transform:translate(-4px,4px);transition:all 0.35s cubic-bezier(0.23,1,0.32,1)}
+.work-card:hover .work-card-arrow{opacity:1;transform:translate(0,0)}
+.work-card-arrow svg{width:14px;height:14px;stroke:var(--pop);stroke-width:2.5}
 
-/* Mobile menu */
-.nav-toggle {
-  display: none; background: none; border: none; cursor: pointer;
-  width: 32px; height: 24px; position: relative; z-index: 10;
-}
-.nav-toggle span {
-  display: block; width: 100%; height: 2px; background: var(--text);
-  position: absolute; left: 0; transition: all 0.3s;
-}
-.nav-toggle span:nth-child(1) { top: 2px; }
-.nav-toggle span:nth-child(2) { top: 11px; }
-.nav-toggle span:nth-child(3) { top: 20px; }
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.service-card{background:var(--bg-card);border:1.5px solid rgba(26,26,46,0.06);border-radius:var(--radius-lg);padding:2rem;box-shadow:0 2px 8px rgba(26,26,46,0.03);transition:all 0.3s}
+.service-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(26,26,46,0.08);border-color:rgba(45,75,230,0.15)}
+.service-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.35rem;margin-bottom:1.25rem}
+.service-icon-brand{background:var(--pop-light)}.service-icon-video{background:#fde8e6}.service-icon-web{background:#ede5fd}.service-icon-game{background:#dcf7ed}.service-icon-photo{background:#fef3cd}.service-icon-docs{background:#e8e8ee}
+.service-card h3{font-family:var(--font-display);font-weight:800;font-size:1.1rem;color:var(--ink);margin-bottom:0.45rem;letter-spacing:-0.01em}
+.service-card p{font-size:0.88rem;color:var(--ink-muted);line-height:1.65}
 
-/* ── HERO ── */
-.hero {
-  min-height: 100vh; display: flex; align-items: center;
-  padding: calc(var(--nav-h) + 4rem) 2rem 6rem;
-  position: relative; overflow: hidden;
-}
-.hero::before {
-  content: ''; position: absolute; top: -200px; right: -200px;
-  width: 700px; height: 700px;
-  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 65%);
-  pointer-events: none; opacity: 0.6;
-}
-.hero::after {
-  content: ''; position: absolute; bottom: -100px; left: -150px;
-  width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(100,80,200,0.06) 0%, transparent 65%);
-  pointer-events: none;
-}
-.hero-inner {
-  max-width: var(--max-w); margin: 0 auto; width: 100%;
-  position: relative; z-index: 1;
-}
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  background: var(--accent-glow); border: 1px solid rgba(212,101,74,0.25);
-  padding: 0.4rem 1rem; border-radius: 100px;
-  font-size: 0.78rem; font-weight: 600; color: var(--accent);
-  letter-spacing: 0.04em; text-transform: uppercase;
-  margin-bottom: 2rem;
-}
-.hero-badge::before {
-  content: ''; width: 7px; height: 7px; border-radius: 50%;
-  background: var(--accent); animation: pulse 2s infinite;
-}
-@keyframes pulse {
-  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 var(--accent); }
-  50% { opacity: 0.7; box-shadow: 0 0 0 6px transparent; }
-}
-.hero h1 {
-  font-family: var(--font-display);
-  font-weight: 800; font-size: clamp(2.8rem, 6vw, 4.5rem);
-  line-height: 1.08; letter-spacing: -0.04em;
-  color: var(--cream); max-width: 800px;
-  margin-bottom: 1.5rem;
-}
-.hero h1 em {
-  font-style: normal;
-  background: linear-gradient(135deg, var(--accent), #e8956e);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.hero-sub {
-  font-size: 1.15rem; color: var(--text-dim);
-  max-width: 540px; line-height: 1.75;
-  margin-bottom: 2.5rem; font-weight: 300;
-}
-.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-.btn {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  padding: 0.9rem 2rem; border-radius: 10px;
-  font-family: var(--font-body); font-weight: 600; font-size: 0.92rem;
-  cursor: pointer; border: none; transition: all 0.3s;
-}
-.btn-primary {
-  background: var(--accent); color: white;
-  box-shadow: 0 2px 12px var(--accent-glow);
-}
-.btn-primary:hover {
-  background: var(--accent-hover); transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(212,101,74,0.3);
-}
-.btn-ghost {
-  background: transparent; color: var(--text);
-  border: 1.5px solid var(--border);
-}
-.btn-ghost:hover {
-  border-color: var(--text-dim); background: var(--bg-raised);
-  transform: translateY(-2px);
-}
-.hero-clients {
-  margin-top: 4rem; padding-top: 2.5rem;
-  border-top: 1px solid var(--border);
-}
-.hero-clients-label {
-  font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.15em;
-  color: var(--text-faint); font-weight: 600; margin-bottom: 1rem;
-}
-.hero-clients-list {
-  display: flex; gap: 2.5rem; flex-wrap: wrap; align-items: center;
-}
-.hero-clients-list span {
-  font-family: var(--font-display); font-weight: 700;
-  font-size: 1.1rem; color: var(--text-dim);
-  opacity: 0.45; letter-spacing: -0.01em;
-  transition: opacity 0.3s;
-}
-.hero-clients-list span:hover { opacity: 0.8; }
+.about-section{background:var(--bg-warm)}
+.about-content{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.about-text p{font-size:1.05rem;color:var(--ink-soft);line-height:1.8;margin-bottom:1.25rem}
+.about-text p strong{color:var(--ink);font-weight:700}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1.15rem}
+.stat-card{background:var(--bg-card);border:1.5px solid rgba(26,26,46,0.06);border-radius:var(--radius);padding:1.4rem;box-shadow:0 2px 8px rgba(26,26,46,0.03);transition:transform 0.3s}
+.stat-card:hover{transform:translateY(-3px)}
+.stat-number{font-family:var(--font-display);font-weight:900;font-size:1.9rem;color:var(--pop);letter-spacing:-0.03em;line-height:1;margin-bottom:0.25rem}
+.stat-label{font-size:0.82rem;color:var(--ink-muted);line-height:1.4}
 
-/* ── SECTION SHARED ── */
-.section { padding: 7rem 2rem; }
-.section-inner { max-width: var(--max-w); margin: 0 auto; }
-.section-header { margin-bottom: 3.5rem; }
-.section-label {
-  font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.18em;
-  font-weight: 700; color: var(--accent); margin-bottom: 0.85rem;
-  display: flex; align-items: center; gap: 0.75rem;
-}
-.section-label::before {
-  content: ''; width: 24px; height: 1.5px; background: var(--accent);
-}
-.section-title {
-  font-family: var(--font-display); font-weight: 800;
-  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-  letter-spacing: -0.03em; color: var(--cream);
-  line-height: 1.15; margin-bottom: 0.75rem;
-}
-.section-desc {
-  font-size: 1.05rem; color: var(--text-dim);
-  max-width: 520px; line-height: 1.7; font-weight: 300;
-}
+.cta-section{text-align:center;background:var(--ink);color:white;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:var(--pop);filter:blur(120px);opacity:0.08;top:-200px;left:50%;transform:translateX(-50%);pointer-events:none}
+.cta-section .section-inner{position:relative;z-index:1}
+.cta-section .section-label{color:rgba(255,255,255,0.4);justify-content:center}
+.cta-section .section-label::before{background:rgba(255,255,255,0.2)}
+.cta-section .section-title{color:white;max-width:540px;margin:0 auto 0.6rem}
+.cta-section .section-desc{color:rgba(255,255,255,0.5);max-width:440px;margin:0 auto 2.5rem;text-align:center}
+.cta-section .btn-primary{background:white;color:var(--pop);box-shadow:0 2px 16px rgba(255,255,255,0.1)}
+.cta-section .btn-primary:hover{background:var(--pop-light);color:var(--pop-hover);box-shadow:0 8px 32px rgba(255,255,255,0.15)}
+.cta-or{color:rgba(255,255,255,0.3);font-size:0.82rem;margin:1.25rem 0;display:block}
+.cta-email{font-family:var(--font-display);font-weight:700;font-size:1.15rem;color:white;border-bottom:2px solid rgba(255,255,255,0.25);padding-bottom:3px;transition:border-color 0.3s}
+.cta-email:hover{border-color:white}
 
-/* ── WORK GRID ── */
-.work-filters {
-  display: flex; gap: 0.5rem; flex-wrap: wrap;
-  margin-bottom: 2.5rem;
-}
-.filter-btn {
-  background: transparent; border: 1.5px solid var(--border);
-  color: var(--text-dim); padding: 0.45rem 1.15rem;
-  border-radius: 100px; font-family: var(--font-body);
-  font-size: 0.82rem; font-weight: 500; cursor: pointer;
-  transition: all 0.25s;
-}
-.filter-btn:hover { border-color: var(--text-dim); color: var(--text); }
-.filter-btn.active {
-  background: var(--accent); border-color: var(--accent);
-  color: white;
-}
-.work-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
-}
-.work-card {
-  position: relative; border-radius: var(--radius-lg);
-  overflow: hidden; cursor: pointer;
-  aspect-ratio: 16 / 10;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  transition: transform 0.4s cubic-bezier(0.23,1,0.32,1),
-              box-shadow 0.4s, border-color 0.3s;
-}
-.work-card:hover {
-  transform: translateY(-6px) scale(1.01);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-  border-color: rgba(212,101,74,0.3);
-}
-.work-card img {
-  width: 100%; height: 100%; object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.23,1,0.32,1), opacity 0.4s;
-}
-.work-card:hover img { transform: scale(1.06); opacity: 0.6; }
-.work-card-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(0deg, rgba(14,14,16,0.95) 0%, rgba(14,14,16,0.1) 55%);
-  padding: 1.5rem; display: flex; flex-direction: column; justify-content: flex-end;
-  opacity: 0.85; transition: opacity 0.3s;
-}
-.work-card:hover .work-card-overlay { opacity: 1; }
-.work-card-cat {
-  font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.14em;
-  font-weight: 700; color: var(--accent); margin-bottom: 0.3rem;
-}
-.work-card-title {
-  font-family: var(--font-display); font-weight: 700;
-  font-size: 1.05rem; color: white; line-height: 1.25;
-}
-.work-card-desc {
-  font-size: 0.8rem; color: var(--text-dim);
-  margin-top: 0.25rem; line-height: 1.45;
-}
-.work-card-arrow {
-  position: absolute; top: 1rem; right: 1rem;
-  width: 36px; height: 36px; border-radius: 50%;
-  background: rgba(255,255,255,0.08); backdrop-filter: blur(8px);
-  display: flex; align-items: center; justify-content: center;
-  opacity: 0; transform: translate(-4px, 4px);
-  transition: all 0.35s cubic-bezier(0.23,1,0.32,1);
-}
-.work-card:hover .work-card-arrow {
-  opacity: 1; transform: translate(0,0);
-}
-.work-card-arrow svg { width: 16px; height: 16px; stroke: white; }
+.footer{padding:2rem;text-align:center;border-top:1.5px solid rgba(26,26,46,0.06)}
+.footer-inner{max-width:var(--max-w);margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+.footer p{font-size:0.8rem;color:var(--ink-faint)}
+.footer-links{display:flex;gap:1.5rem}
+.footer-links a{font-size:0.8rem;color:var(--ink-faint);transition:color 0.25s}
+.footer-links a:hover{color:var(--pop)}
 
-/* ── SERVICES ── */
-.services-section { background: var(--bg-raised); }
-.services-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
-}
-.service-card {
-  background: var(--bg); border: 1px solid var(--border);
-  border-radius: var(--radius-lg); padding: 2rem;
-  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-  position: relative; overflow: hidden;
-}
-.service-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0;
-  height: 3px; background: linear-gradient(90deg, var(--accent), transparent);
-  opacity: 0; transition: opacity 0.3s;
-}
-.service-card:hover {
-  border-color: rgba(212,101,74,0.3);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.2);
-}
-.service-card:hover::before { opacity: 1; }
-.service-icon {
-  width: 44px; height: 44px; border-radius: 12px;
-  background: var(--accent-glow); border: 1px solid rgba(212,101,74,0.2);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.2rem; margin-bottom: 1.25rem;
-}
-.service-card h3 {
-  font-family: var(--font-display); font-weight: 700;
-  font-size: 1.1rem; color: var(--cream);
-  margin-bottom: 0.5rem; letter-spacing: -0.01em;
-}
-.service-card p {
-  font-size: 0.88rem; color: var(--text-dim); line-height: 1.65;
-}
+.modal-overlay{position:fixed;inset:0;z-index:2000;background:rgba(26,26,46,0.6);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.35s;padding:2rem}
+.modal-overlay.open{opacity:1;pointer-events:auto}
+.modal{background:var(--bg-card);border:1.5px solid rgba(26,26,46,0.06);border-radius:var(--radius-lg);max-width:840px;width:100%;max-height:85vh;overflow-y:auto;position:relative;transform:translateY(20px) scale(0.97);transition:transform 0.4s cubic-bezier(0.23,1,0.32,1);box-shadow:0 24px 80px rgba(26,26,46,0.2)}
+.modal-overlay.open .modal{transform:translateY(0) scale(1)}
+.modal-close{position:sticky;top:1rem;float:right;margin:1rem;width:40px;height:40px;border-radius:50%;background:var(--bg);border:1.5px solid rgba(26,26,46,0.08);color:var(--ink);cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center;font-size:1.1rem;transition:all 0.25s}
+.modal-close:hover{background:var(--pop);color:white;border-color:var(--pop)}
+.modal-image{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius-lg) var(--radius-lg) 0 0}
+.modal-body{padding:2rem 2.5rem 2.5rem}
+.modal-cat{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.14em;font-weight:700;color:var(--pop);margin-bottom:0.4rem}
+.modal-title{font-family:var(--font-display);font-weight:900;font-size:1.7rem;color:var(--ink);letter-spacing:-0.02em;margin-bottom:0.5rem}
+.modal-meta{display:flex;gap:2rem;margin-bottom:1.5rem;font-size:0.82rem;color:var(--ink-faint)}
+.modal-meta strong{color:var(--ink-muted)}
+.modal-text{color:var(--ink-muted);line-height:1.8}
+.modal-text h4{font-family:var(--font-display);font-weight:800;color:var(--ink);font-size:1rem;margin:1.5rem 0 0.5rem}
+.modal-text p{margin-bottom:1rem}
+.modal-link{display:inline-flex;align-items:center;gap:0.5rem;margin-top:1rem;padding:0.65rem 1.5rem;background:var(--pop);color:white;border-radius:10px;font-weight:700;font-size:0.88rem;transition:background 0.25s}
+.modal-link:hover{background:var(--pop-hover)}
 
-/* ── ABOUT ── */
-.about-content {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 4rem; align-items: start;
-}
-.about-text p {
-  font-size: 1.05rem; color: var(--text-dim); line-height: 1.8;
-  margin-bottom: 1.25rem; font-weight: 300;
-}
-.about-text p strong { color: var(--cream); font-weight: 500; }
-.about-stats {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
-  margin-top: 1rem;
-}
-.stat-card {
-  background: var(--bg-raised); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 1.5rem;
-}
-.stat-number {
-  font-family: var(--font-display); font-weight: 800;
-  font-size: 2rem; color: var(--accent);
-  letter-spacing: -0.03em; line-height: 1;
-  margin-bottom: 0.3rem;
-}
-.stat-label {
-  font-size: 0.82rem; color: var(--text-dim); line-height: 1.4;
-}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s cubic-bezier(0.23,1,0.32,1),transform 0.7s cubic-bezier(0.23,1,0.32,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:0.1s}.reveal-d2{transition-delay:0.2s}.reveal-d3{transition-delay:0.3s}
 
-/* ── CTA / CONTACT ── */
-.cta-section {
-  text-align: center;
-  background: var(--bg-raised);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-.cta-section .section-header { margin-bottom: 2rem; }
-.cta-section .section-title { max-width: 580px; margin: 0 auto 0.75rem; }
-.cta-section .section-desc { max-width: 460px; margin: 0 auto 2.5rem; text-align: center; }
-.cta-section .section-label { justify-content: center; }
-.cta-section .section-label::before { display: none; }
-.cta-email-display {
-  font-family: var(--font-display); font-weight: 700;
-  font-size: clamp(1.1rem, 2.5vw, 1.6rem); color: var(--cream);
-  border-bottom: 2px solid var(--accent);
-  padding-bottom: 4px; transition: color 0.3s;
-  display: inline-block; margin-top: 1.5rem;
-}
-.cta-email-display:hover { color: var(--accent); }
-.cta-or {
-  color: var(--text-faint); font-size: 0.82rem;
-  margin: 1rem 0; display: block;
-}
-
-/* ── FOOTER ── */
-.footer {
-  padding: 2.5rem 2rem;
-  border-top: 1px solid var(--border);
-  text-align: center;
-}
-.footer-inner {
-  max-width: var(--max-w); margin: 0 auto;
-  display: flex; justify-content: space-between; align-items: center;
-}
-.footer p { font-size: 0.8rem; color: var(--text-faint); }
-.footer-links { display: flex; gap: 1.5rem; }
-.footer-links a {
-  font-size: 0.8rem; color: var(--text-faint);
-  transition: color 0.25s;
-}
-.footer-links a:hover { color: var(--accent); }
-
-/* ── SCROLL ANIMATIONS ── */
-.reveal {
-  opacity: 0; transform: translateY(32px);
-  transition: opacity 0.7s cubic-bezier(0.23,1,0.32,1),
-              transform 0.7s cubic-bezier(0.23,1,0.32,1);
-}
-.reveal.visible { opacity: 1; transform: translateY(0); }
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-
-/* ── GRAIN TEXTURE ── */
-.grain {
-  position: fixed; inset: 0; z-index: 9999;
-  pointer-events: none; opacity: 0.025;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 200px;
-}
-
-/* ── PROJECT MODAL ── */
-.modal-overlay {
-  position: fixed; inset: 0; z-index: 2000;
-  background: rgba(0,0,0,0.85);
-  backdrop-filter: blur(8px);
-  display: flex; align-items: center; justify-content: center;
-  opacity: 0; pointer-events: none;
-  transition: opacity 0.35s;
-  padding: 2rem;
-}
-.modal-overlay.open { opacity: 1; pointer-events: auto; }
-.modal {
-  background: var(--bg-raised); border: 1px solid var(--border);
-  border-radius: var(--radius-lg); max-width: 860px; width: 100%;
-  max-height: 85vh; overflow-y: auto; position: relative;
-  transform: translateY(24px) scale(0.97);
-  transition: transform 0.4s cubic-bezier(0.23,1,0.32,1);
-}
-.modal-overlay.open .modal { transform: translateY(0) scale(1); }
-.modal-close {
-  position: sticky; top: 1rem; float: right; margin: 1rem;
-  width: 40px; height: 40px; border-radius: 50%;
-  background: var(--surface); border: 1px solid var(--border);
-  color: var(--text); cursor: pointer; z-index: 10;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.2rem; transition: background 0.25s;
-}
-.modal-close:hover { background: var(--accent); color: white; border-color: var(--accent); }
-.modal-image {
-  width: 100%; aspect-ratio: 16/9; object-fit: cover;
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-}
-.modal-body { padding: 2rem 2.5rem 2.5rem; }
-.modal-cat {
-  font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.14em;
-  font-weight: 700; color: var(--accent); margin-bottom: 0.5rem;
-}
-.modal-title {
-  font-family: var(--font-display); font-weight: 800;
-  font-size: 1.8rem; color: var(--cream);
-  letter-spacing: -0.02em; margin-bottom: 0.5rem;
-}
-.modal-meta {
-  display: flex; gap: 2rem; margin-bottom: 1.5rem;
-  font-size: 0.82rem; color: var(--text-faint);
-}
-.modal-meta strong { color: var(--text-dim); }
-.modal-text { color: var(--text-dim); line-height: 1.8; font-weight: 300; }
-.modal-text h4 {
-  font-family: var(--font-display); font-weight: 700;
-  color: var(--cream); font-size: 1rem; margin: 1.5rem 0 0.5rem;
-}
-.modal-text p { margin-bottom: 1rem; }
-.modal-link {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  margin-top: 1rem; padding: 0.65rem 1.5rem;
-  background: var(--accent); color: white; border-radius: 8px;
-  font-weight: 600; font-size: 0.88rem;
-  transition: background 0.25s;
-}
-.modal-link:hover { background: var(--accent-hover); }
-
-/* ── RESPONSIVE ── */
-@media (max-width: 1024px) {
-  .work-grid { grid-template-columns: repeat(2, 1fr); }
-  .services-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 768px) {
-  .nav-links { 
-    display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(14,14,16,0.97); backdrop-filter: blur(20px);
-    flex-direction: column; align-items: center; justify-content: center;
-    gap: 2rem;
-  }
-  .nav-links.open { display: flex; }
-  .nav-links a { font-size: 1.2rem; }
-  .nav-toggle { display: block; }
-  .hero { min-height: auto; padding-top: calc(var(--nav-h) + 3rem); padding-bottom: 4rem; }
-  .hero h1 { font-size: 2.2rem; }
-  .work-grid { grid-template-columns: 1fr; }
-  .services-grid { grid-template-columns: 1fr; }
-  .about-content { grid-template-columns: 1fr; gap: 2rem; }
-  .section { padding: 4rem 1.25rem; }
-  .footer-inner { flex-direction: column; gap: 1rem; }
-  .hero-clients-list { gap: 1.5rem; }
-}
-@media (max-width: 480px) {
-  .hero-actions { flex-direction: column; }
-  .btn { justify-content: center; width: 100%; }
-  .about-stats { grid-template-columns: 1fr; }
-  .work-filters { gap: 0.35rem; }
-  .filter-btn { font-size: 0.75rem; padding: 0.4rem 0.9rem; }
-}
+@media(max-width:1024px){.hero-inner{grid-template-columns:1fr;gap:2rem}.hero-visual{height:300px;max-width:500px}.work-grid{grid-template-columns:repeat(2,1fr)}.services-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.nav-links{display:none;position:fixed;inset:0;background:rgba(245,240,232,0.97);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:2rem}.nav-links.open{display:flex}.nav-links a{font-size:1.15rem;color:var(--ink)}.nav-toggle{display:block}.hero{min-height:auto;padding-bottom:3rem}.hero-visual{display:none}.work-grid{grid-template-columns:1fr}.services-grid{grid-template-columns:1fr}.about-content{grid-template-columns:1fr;gap:2rem}.section{padding:4rem 1.25rem}.footer-inner{flex-direction:column;gap:1rem}}
+@media(max-width:480px){.hero-actions{flex-direction:column}.btn{justify-content:center;width:100%}.about-stats{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
+<nav class="nav"><div class="nav-inner"><a href="#" class="nav-logo">Alan Maudlin<span class="dot">.</span></a><div class="nav-links" id="navLinks"><a href="#work">Work</a><a href="#services">Services</a><a href="#about">About</a><a href="#contact" class="nav-cta">Get in Touch</a></div><button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
 
-<div class="grain"></div>
-
-<!-- NAV -->
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="#" class="nav-logo">AM<span>.</span></a>
-    <div class="nav-links" id="navLinks">
-      <a href="#work">Work</a>
-      <a href="#services">Services</a>
-      <a href="#about">About</a>
-      <a href="#contact" class="nav-cta">Get in Touch</a>
-    </div>
-    <button class="nav-toggle" id="navToggle" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-
-<!-- HERO -->
 <section class="hero" id="hero">
-  <div class="hero-inner">
-    <div class="hero-badge reveal">Available for freelance &amp; contract</div>
-    <h1 class="reveal reveal-delay-1">Design, video &amp; games — from <em>one person</em> who gets it done.</h1>
-    <p class="hero-sub reveal reveal-delay-2">I help companies look sharper, communicate clearly, and ship creative work faster — without the overhead of a full agency. One point of contact. No hand-offs. No nonsense.</p>
-    <div class="hero-actions reveal reveal-delay-3">
-      <a href="#contact" class="btn btn-primary">Let's talk about your project ↗</a>
-      <a href="#work" class="btn btn-ghost">See the work</a>
-    </div>
-    <div class="hero-clients reveal">
-      <div class="hero-clients-label">Trusted by</div>
-      <div class="hero-clients-list">
-        <span>Samsung</span>
-        <span>Akixi</span>
-        <span>Mondago</span>
-        <span>RWS</span>
-        <span>CallSights</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WORK -->
-<section class="section" id="work">
-  <div class="section-inner">
-    <div class="section-header reveal">
-      <div class="section-label">Selected Work</div>
-      <h2 class="section-title">Projects I'm proud of</h2>
-      <p class="section-desc">Brand films, product demos, UI redesigns, and one point-and-click adventure game that nobody asked for but everyone enjoyed.</p>
-    </div>
-    <div class="work-filters reveal" id="workFilters"></div>
-    <div class="work-grid" id="workGrid"></div>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section class="section services-section" id="services">
-  <div class="section-inner">
-    <div class="section-header reveal">
-      <div class="section-label">What I Do</div>
-      <h2 class="section-title">One creative, fewer headaches</h2>
-      <p class="section-desc">I handle the full creative pipeline so you don't need to coordinate between a designer, editor, and developer.</p>
-    </div>
-    <div class="services-grid">
-      <div class="service-card reveal">
-        <div class="service-icon">🎨</div>
-        <h3>Branding &amp; Identity</h3>
-        <p>Logos, brand guidelines, case studies, event materials, and social assets. Everything stays on-brand because one person owns the whole system.</p>
-      </div>
-      <div class="service-card reveal reveal-delay-1">
-        <div class="service-icon">🎬</div>
-        <h3>Video &amp; Motion</h3>
-        <p>Product demos, promo films, internal comms, trade show loops, and tutorials. Scripting through to final edit — soup to nuts.</p>
-      </div>
-      <div class="service-card reveal reveal-delay-2">
-        <div class="service-icon">🌐</div>
-        <h3>Web &amp; UI Design</h3>
-        <p>Landing pages, UI/UX redesigns, responsive layouts, and interactive prototypes. Clean design with proper attention to how things actually work.</p>
-      </div>
-      <div class="service-card reveal reveal-delay-1">
-        <div class="service-icon">🎮</div>
-        <h3>Game &amp; Experience Design</h3>
-        <p>Unity-based games, interactive training tools, and gamified experiences. Ideal for onboarding, engagement, or brand activations people actually remember.</p>
-      </div>
-      <div class="service-card reveal reveal-delay-2">
-        <div class="service-icon">📸</div>
-        <h3>Photography</h3>
-        <p>Professional portraits, team photos, and product photography. Consistent, well-lit imagery that matches your brand — no awkward stock photo energy.</p>
-      </div>
-      <div class="service-card reveal reveal-delay-3">
-        <div class="service-icon">📄</div>
-        <h3>Documentation</h3>
-        <p>Case studies, white papers, partner materials, and onboarding guides. Clear, well-designed documents that actually get read.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section class="section" id="about">
-  <div class="section-inner">
-    <div class="section-header reveal">
-      <div class="section-label">About</div>
-      <h2 class="section-title">Hi, I'm Alan.</h2>
-    </div>
-    <div class="about-content">
-      <div class="about-text reveal">
-        <p>I'm a UK-based <strong>creative generalist</strong>, which is a tidy way of saying I've spent years bouncing (quite happily) between design, video/motion, web, and game projects.</p>
-        <p>I like work where there's a mix of <strong>craft and problem-solving</strong>. Sometimes that means tidying up something complicated until it becomes simple. Sometimes it means making something feel more human. And sometimes it means building something playful that still needs proper structure behind it.</p>
-        <p>I've worked with companies who need someone who can plug in fast, communicate clearly, and deliver. I'm comfortable collaborating with developers and non-designers, and I'm equally happy working solo when you just need the job done properly.</p>
-        <p>Outside of client work, I'm usually building game ideas with friends — the fun kind of projects where you get to obsess over tiny details that nobody asked for.</p>
-      </div>
-      <div class="about-stats reveal reveal-delay-1">
-        <div class="stat-card">
-          <div class="stat-number">10+</div>
-          <div class="stat-label">Years of creative experience</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">4</div>
-          <div class="stat-label">Core disciplines under one roof</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">B2B</div>
-          <div class="stat-label">Specialist — SaaS, telecoms, tech</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">UK</div>
-          <div class="stat-label">Based — remote or on-site</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="section cta-section" id="contact">
-  <div class="section-inner">
-    <div class="section-header reveal">
-      <div class="section-label">Get in Touch</div>
-      <h2 class="section-title">Got a project? Let's have a chat.</h2>
-      <p class="section-desc">I'm currently available for freelance and contract work. No awkward sales calls — just a friendly conversation about what you need.</p>
-    </div>
-    <div class="reveal">
-      <a href="mailto:alan@alanmaudlin.com" class="btn btn-primary">Email me — alan@alanmaudlin.com</a>
-      <span class="cta-or">or find me on</span>
-      <!-- ADD YOUR LINKEDIN URL BELOW -->
-      <a href="#" class="cta-email-display">LinkedIn →</a>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-inner">
-    <p>&copy; 2026 Alan Maudlin. Based in the UK, working with clients everywhere.</p>
-    <div class="footer-links">
-      <a href="mailto:alan@alanmaudlin.com">Email</a>
-      <a href="#">LinkedIn</a>
-    </div>
-  </div>
-</footer>
-
-<!-- PROJECT MODAL -->
-<div class="modal-overlay" id="modal">
-  <div class="modal">
-    <button class="modal-close" id="modalClose">✕</button>
-    <img class="modal-image" id="modalImage" src="" alt="">
-    <div class="modal-body">
-      <div class="modal-cat" id="modalCat"></div>
-      <h3 class="modal-title" id="modalTitle"></h3>
-      <div class="modal-meta" id="modalMeta"></div>
-      <div class="modal-text" id="modalText"></div>
-      <div id="modalLinkWrap"></div>
-    </div>
-  </div>
+<div class="hero-blob hero-blob-1"></div><div class="hero-blob hero-blob-2"></div><div class="hero-blob hero-blob-3"></div>
+<div class="hero-inner">
+<div>
+<div class="hero-badge reveal">Available for freelance &amp; contract</div>
+<h1 class="reveal reveal-d1">Design, video &amp; games — from <em>one person</em> who gets it done.</h1>
+<p class="hero-sub reveal reveal-d2">I help companies look sharper, communicate clearly, and ship creative work faster — without the overhead of a full agency. One point of contact. No hand-offs. No nonsense.</p>
+<div class="hero-actions reveal reveal-d3">
+<a href="#contact" class="btn btn-primary">Let's talk about your project ↗</a>
+<a href="#work" class="btn btn-ghost">See the work</a>
 </div>
+</div>
+<div class="hero-visual reveal reveal-d2">
+<div class="hero-card hero-card-1"><img src="https://alanmaudlin.com/wp-content/uploads/2026/01/Akixi-2024-Rebrand-Reveal.png" alt="Akixi Rebrand" loading="lazy"><span class="hero-card-tag tag-brand">Branding</span></div>
+<div class="hero-card hero-card-2"><img src="https://alanmaudlin.com/wp-content/uploads/2026/01/Agapo-DGC-Teaser-Trailer.png" alt="Disc Golf City" loading="lazy"><span class="hero-card-tag tag-game">Game Dev</span></div>
+<div class="hero-card hero-card-3"><img src="https://alanmaudlin.com/wp-content/uploads/2026/01/Akixi-RealTime-Demo.png" alt="Akixi Demo" loading="lazy"><span class="hero-card-tag tag-video">Video</span></div>
+</div>
+<div class="hero-clients reveal">
+<div class="hero-clients-label">Trusted by</div>
+<div class="hero-clients-list"><span>Samsung</span><span>Akixi</span><span>Mondago</span><span>RWS</span><span>CallSights</span></div>
+</div>
+</div>
+</section>
+
+<section class="section work-section" id="work"><div class="section-inner">
+<div class="section-header reveal"><div class="section-label">Selected Work</div><h2 class="section-title">Projects I'm proud of</h2><p class="section-desc">Brand films, product demos, UI redesigns, and one point-and-click adventure game that nobody asked for but everyone enjoyed.</p></div>
+<div class="work-filters reveal" id="workFilters"></div>
+<div class="work-grid" id="workGrid"></div>
+</div></section>
+
+<section class="section" id="services"><div class="section-inner">
+<div class="section-header reveal"><div class="section-label">What I Do</div><h2 class="section-title">One creative, fewer headaches</h2><p class="section-desc">I handle the full creative pipeline so you don't need to coordinate between a designer, editor, and developer.</p></div>
+<div class="services-grid">
+<div class="service-card reveal"><div class="service-icon service-icon-brand">🎨</div><h3>Branding &amp; Identity</h3><p>Logos, brand guidelines, case studies, event materials, and social assets. Everything stays on-brand because one person owns the whole system.</p></div>
+<div class="service-card reveal reveal-d1"><div class="service-icon service-icon-video">🎬</div><h3>Video &amp; Motion</h3><p>Product demos, promo films, internal comms, trade show loops, and tutorials. Scripting through to final edit — soup to nuts.</p></div>
+<div class="service-card reveal reveal-d2"><div class="service-icon service-icon-web">🌐</div><h3>Web &amp; UI Design</h3><p>Landing pages, UI/UX redesigns, responsive layouts, and interactive prototypes. Clean design with proper attention to how things actually work.</p></div>
+<div class="service-card reveal reveal-d1"><div class="service-icon service-icon-game">🎮</div><h3>Game &amp; Experience Design</h3><p>Unity-based games, interactive training tools, and gamified experiences. Ideal for onboarding, engagement, or brand activations people actually remember.</p></div>
+<div class="service-card reveal reveal-d2"><div class="service-icon service-icon-photo">📸</div><h3>Photography</h3><p>Professional portraits, team photos, and product photography. Consistent, well-lit imagery that matches your brand — no awkward stock photo energy.</p></div>
+<div class="service-card reveal reveal-d3"><div class="service-icon service-icon-docs">📄</div><h3>Documentation</h3><p>Case studies, white papers, partner materials, and onboarding guides. Clear, well-designed documents that actually get read.</p></div>
+</div>
+</div></section>
+
+<section class="section about-section" id="about"><div class="section-inner">
+<div class="section-header reveal"><div class="section-label">About</div><h2 class="section-title">Hi, I'm Alan.</h2></div>
+<div class="about-content">
+<div class="about-text reveal">
+<p>I'm a UK-based <strong>creative generalist</strong>, which is a tidy way of saying I've spent years bouncing (quite happily) between design, video/motion, web, and game projects.</p>
+<p>I like work where there's a mix of <strong>craft and problem-solving</strong>. Sometimes that means tidying up something complicated until it becomes simple. Sometimes it means making something feel more human. And sometimes it means building something playful that still needs proper structure behind it.</p>
+<p>I've worked with companies who need someone who can plug in fast, communicate clearly, and deliver. I'm comfortable collaborating with developers and non-designers, and I'm equally happy working solo when you just need the job done properly.</p>
+<p>Outside of client work, I'm usually building game ideas with friends — the fun kind of projects where you get to obsess over tiny details that nobody asked for.</p>
+</div>
+<div class="about-stats reveal reveal-d1">
+<div class="stat-card"><div class="stat-number">10+</div><div class="stat-label">Years of creative experience</div></div>
+<div class="stat-card"><div class="stat-number">4</div><div class="stat-label">Core disciplines under one roof</div></div>
+<div class="stat-card"><div class="stat-number">B2B</div><div class="stat-label">Specialist — SaaS, telecoms, tech</div></div>
+<div class="stat-card"><div class="stat-number">UK</div><div class="stat-label">Based — remote or on-site</div></div>
+</div>
+</div>
+</div></section>
+
+<section class="section cta-section" id="contact"><div class="section-inner">
+<div class="section-header reveal"><div class="section-label">Get in Touch</div><h2 class="section-title">Got a project? Let's have a chat.</h2><p class="section-desc">I'm currently available for freelance and contract work. No awkward sales calls — just a friendly conversation about what you need.</p></div>
+<div class="reveal"><a href="mailto:alan@alanmaudlin.com" class="btn btn-primary">Email me — alan@alanmaudlin.com</a><span class="cta-or">or find me on</span><a href="#" class="cta-email">LinkedIn →</a></div>
+</div></section>
+
+<footer class="footer"><div class="footer-inner"><p>&copy; 2026 Alan Maudlin. Based in the UK, working with clients everywhere.</p><div class="footer-links"><a href="mailto:alan@alanmaudlin.com">Email</a><a href="#">LinkedIn</a></div></div></footer>
+
+<div class="modal-overlay" id="modal"><div class="modal"><button class="modal-close" id="modalClose">✕</button><img class="modal-image" id="modalImage" src="" alt=""><div class="modal-body"><div class="modal-cat" id="modalCat"></div><h3 class="modal-title" id="modalTitle"></h3><div class="modal-meta" id="modalMeta"></div><div class="modal-text" id="modalText"></div><div id="modalLinkWrap"></div></div></div></div>
 
 <script>
-/* ============================================
-   PROJECT DATA
-   ───────────────────────────────────────────
-   To add a new project: copy an object below,
-   change the values, and it appears on the site.
-   To remove: delete the object.
-   ============================================ */
-const projects = [
-  {
-    title: "Akixi 2024 Rebrand Reveal",
-    category: ["Branding", "Video"],
-    image: "https://alanmaudlin.com/wp-content/uploads/2026/01/Akixi-2024-Rebrand-Reveal.png",
-    description: "Bringing a 15-year-old brand into the present.",
-    client: "Akixi",
-    role: "Art Direction, Animation, Editing",
-    brief: "After 15 years with the same brand identity, Akixi needed a video to introduce their new look internally — something that honoured the company's history while building genuine excitement for the change ahead.",
-    process: "I developed a concept around the passage of time — the old brand literally evolving into the new one through animated transitions. Everything was built to strict adherence to the new brand guidelines, which became both a constraint and a creative challenge.",
-    result: "The video was premiered at the company all-hands and was later adapted into an external-facing version. The creative approach became the template for subsequent brand launch materials.",
-    link: null,
-    linkText: null
-  },
-  {
-    title: "RWS Trailer",
-    category: ["Video"],
-    image: "https://alanmaudlin.com/wp-content/uploads/2026/03/RWSTrailer.png",
-    description: "Promotional trailer for RWS.",
-    client: "RWS",
-    role: "Video Production",
-    brief: "RWS needed a compelling promotional trailer to showcase their services and brand identity.",
-    process: "Developed the concept, storyboard, and full production pipeline from scripting through to final delivery.",
-    result: "Delivered a polished trailer that captured the company's brand essence.",
-    link: null,
-    linkText: null
-  },
-  {
-    title: "Samsung Xchange Promo 2018",
-    category: ["Video"],
-    image: "https://alanmaudlin.com/wp-content/uploads/2026/03/SamsungXchangePromo2018.png",
-    description: "Promotional video for Samsung's Xchange platform.",
-    client: "Samsung",
-    role: "Video Production, Motion Graphics",
-    brief: "Samsung needed a promo video for their Xchange platform launch.",
-    process: "Produced the full video including motion graphics, editing, and sound design.",
-    result: "Successfully delivered for the platform launch campaign.",
-    link: null,
-    linkText: null
-  },
-  {
-    title: "Akixi Real-Time Demo",
-    category: ["Video"],
-    image: "https://alanmaudlin.com/wp-content/uploads/2026/01/Akixi-RealTime-Demo.png",
-    description: "Showing complex software in under two minutes.",
-    client: "Akixi",
-    role: "Scripting, Screen Capture, Editing, Motion Graphics",
-    brief: "Akixi needed a concise product demo that could explain their real-time analytics dashboard to prospects without requiring a live walkthrough.",
-    process: "Scripted a tight narrative that walks viewers through the key features while keeping things engaging. Combined screen captures with motion graphics overlays to highlight key interactions.",
-    result: "The demo became a core sales enablement asset, used in outreach emails and on the website.",
-    link: null,
-    linkText: null
-  },
-  {
-    title: "Akixi Partner Hub Promo",
-    category: ["Video"],
-    image: "https://alanmaudlin.com/wp-content/uploads/2026/01/Akixi-Partner-Hub-Promo.png",
-    description: "Promoting Akixi's partner-facing platform.",
-    client: "Akixi",
-    role: "Video Production, Motion Graphics",
-    brief: "A promotional video to introduce and drive adoption of Akixi's Partner Hub among channel partners.",
-    process: "Combined product UI footage with branded motion graphics to create an engaging walkthrough of the platform's key features and benefits.",
-    result: "Used across partner communications to drive Hub registrations.",
-    link: null,
-    linkText: null
-  },
-  {
-    title: "Mondago Point & Click Adventure",
-    category: ["Game Development"],
-    image: "https://alanmaudlin.com/wp-content/uploads/2026/01/Mondago-Point-And-Click-Adventure.png",
-    description: "A gamified onboarding tool built in Unity.",
-    client: "Mondago",
-    role: "Game Design, Illustration, Unity Development",
-    brief: "Mondago needed a way to onboard new starters that was more engaging than a PDF. I pitched a point-and-click adventure game that would teach new hires about the office, the team, and the company culture.",
-    process: "Designed and developed the game in Unity, hand-drawing every environment and character in Illustrator to accurately recreate the real Mondago office and staff. A small team formed around the project — advisory roles, then QA. The game featured dialogue trees, item puzzles, and a speedrun timer.",
-    result: "Deployed for all new starters. Became a genuine talking point during onboarding and an internal morale booster. Graham still holds the speedrun record.",
-    link: "https://mondagopnc.s3.eu-west-2.amazonaws.com/index.html",
-    linkText: "Play the Game"
-  },
-  {
-    title: "Akixi CRM Viewer Redesign",
-    category: ["Web Design"],
-    image: "https://alanmaudlin.com/wp-content/uploads/2026/01/Akixi-CRM-Viewer-Mockup-01-Landing-Page-Desktop.png",
-    description: "Rethinking the partner-facing analytics interface.",
-    client: "Akixi",
-    role: "UI/UX Design",
-    brief: "The task was to replace the existing CRM Viewer inherited when Mondago was acquired by Akixi, creating a modern, user-friendly interface.",
-    process: "Redesigned the full interface with a focus on clarity, data hierarchy, and the partner experience. Produced desktop and responsive mockups.",
-    result: "The new design provided a significantly improved user experience for Akixi's partner network.",
-    link: null,
-    linkText: null
-  },
-  {
-    title: "Disc Golf City Teaser Trailer",
-    category: ["Game Development", "Video"],
-    image: "https://alanmaudlin.com/wp-content/uploads/2026/01/Agapo-DGC-Teaser-Trailer.png",
-    description: "Teaser trailer for an upcoming disc golf game.",
-    client: "Agapo (Personal Project)",
-    role: "Game Design, Video Production, Motion Graphics",
-    brief: "A teaser trailer to build anticipation for Disc Golf City, a game project in development.",
-    process: "Created the full trailer from concept to delivery, combining in-game footage with motion graphics and sound design.",
-    result: "Successfully built early interest and awareness for the game concept.",
-    link: null,
-    linkText: null
-  },
-  {
-    title: "Akixi Video Call Backgrounds",
-    category: ["Branding"],
-    image: "https://alanmaudlin.com/wp-content/uploads/2026/01/Akixi-Library01.png",
-    description: "On-brand virtual backgrounds for the team.",
-    client: "Akixi",
-    role: "Graphic Design",
-    brief: "With remote work becoming the norm, Akixi needed branded virtual backgrounds for video calls that felt professional without being dull.",
-    process: "Designed a set of backgrounds using the brand guidelines, creating variety while maintaining consistency across the collection.",
-    result: "Adopted across the company for client-facing and internal calls.",
-    link: null,
-    linkText: null
-  },
-  {
-    title: "CallSights Commsverse Booth Video",
-    category: ["Video"],
-    image: "https://alanmaudlin.com/wp-content/uploads/2026/01/CallSights-Commsverse-Booth-2023.png",
-    description: "Trade show booth loop for Commsverse 2023.",
-    client: "CallSights",
-    role: "Video Production, Motion Graphics",
-    brief: "CallSights needed an attention-grabbing booth video for the Commsverse trade show.",
-    process: "Produced a looping video designed to draw attention on the show floor, combining product messaging with dynamic motion graphics.",
-    result: "Ran at the booth throughout Commsverse 2023.",
-    link: null,
-    linkText: null
-  },
-  {
-    title: "Akixi Case Studies",
-    category: ["Documentation"],
-    image: "https://alanmaudlin.com/wp-content/uploads/2026/01/ECCR-CaseStudy-Gleadless.png",
-    description: "Designed case study documents for the sales team.",
-    client: "Akixi",
-    role: "Document Design, Layout",
-    brief: "Akixi's sales team needed professional, well-designed case studies to share with prospects.",
-    process: "Designed a flexible case study template and produced multiple finished documents, ensuring consistency with the brand while making each story engaging and easy to scan.",
-    result: "Became core collateral for the sales team's outreach toolkit.",
-    link: null,
-    linkText: null
-  },
-  {
-    title: "Akixi Portraits",
-    category: ["Photography"],
-    image: "https://alanmaudlin.com/wp-content/uploads/2026/01/Sales-And-C-Suite-Portraits.png",
-    description: "Professional headshots for the team.",
-    client: "Akixi",
-    role: "Photography, Retouching",
-    brief: "Akixi needed consistent, professional headshots for the sales team and C-suite.",
-    process: "Set up and shot portraits on-site with controlled lighting, then processed and retouched the full set for consistency.",
-    result: "Used across LinkedIn, the company website, and internal communications.",
-    link: null,
-    linkText: null
-  },
-  {
-    title: "Mondago Go Integrator v4 Booth Video",
-    category: ["Video"],
-    image: "https://alanmaudlin.com/wp-content/uploads/2026/01/Mondago-Go-Integrator-v4-Booth-Video.png",
-    description: "Trade show video for Go Integrator v4 launch.",
-    client: "Mondago",
-    role: "Video Production, Motion Graphics",
-    brief: "Mondago needed a booth video to promote the launch of Go Integrator version 4 at trade events.",
-    process: "Produced an engaging product-focused video with motion graphics, designed to loop seamlessly on booth displays.",
-    result: "Deployed at multiple trade shows during the v4 launch campaign.",
-    link: null,
-    linkText: null
-  },
-  {
-    title: "How to Demo Akixi for MS Teams",
-    category: ["Video"],
-    image: "https://alanmaudlin.com/wp-content/uploads/2026/01/Akixi-How-to-Demo-A4MT.png",
-    description: "Internal training video for the sales team.",
-    client: "Akixi",
-    role: "Scripting, Screen Capture, Editing",
-    brief: "The sales team needed a clear walkthrough of how to demo Akixi's Microsoft Teams integration to prospects.",
-    process: "Scripted and produced an internal training video combining screen captures with clear narration guidance.",
-    result: "Used as a standard training resource for new sales team members.",
-    link: null,
-    linkText: null
-  }
-];
+const projects=[{title:"Akixi 2024 Rebrand Reveal",category:["Branding","Video"],image:"https://alanmaudlin.com/wp-content/uploads/2026/01/Akixi-2024-Rebrand-Reveal.png",description:"Bringing a 15-year-old brand into the present.",client:"Akixi",role:"Art Direction, Animation, Editing",brief:"After 15 years with the same brand identity, Akixi needed a video to introduce their new look internally — something that honoured the company's history while building genuine excitement for the change ahead.",process:"I developed a concept around the passage of time — the old brand literally evolving into the new one through animated transitions. Everything was built to strict adherence to the new brand guidelines, which became both a constraint and a creative challenge.",result:"The video was premiered at the company all-hands and was later adapted into an external-facing version. The creative approach became the template for subsequent brand launch materials.",link:null,linkText:null},{title:"RWS Trailer",category:["Video"],image:"https://alanmaudlin.com/wp-content/uploads/2026/03/RWSTrailer.png",description:"Promotional trailer for RWS.",client:"RWS",role:"Video Production",brief:"RWS needed a compelling promotional trailer to showcase their services and brand identity.",process:"Developed the concept, storyboard, and full production pipeline from scripting through to final delivery.",result:"Delivered a polished trailer that captured the company's brand essence.",link:null,linkText:null},{title:"Samsung Xchange Promo 2018",category:["Video"],image:"https://alanmaudlin.com/wp-content/uploads/2026/03/SamsungXchangePromo2018.png",description:"Promotional video for Samsung's Xchange platform.",client:"Samsung",role:"Video Production, Motion Graphics",brief:"Samsung needed a promo video for their Xchange platform launch.",process:"Produced the full video including motion graphics, editing, and sound design.",result:"Successfully delivered for the platform launch campaign.",link:null,linkText:null},{title:"Akixi Real-Time Demo",category:["Video"],image:"https://alanmaudlin.com/wp-content/uploads/2026/01/Akixi-RealTime-Demo.png",description:"Showing complex software in under two minutes.",client:"Akixi",role:"Scripting, Screen Capture, Editing, Motion Graphics",brief:"Akixi needed a concise product demo that could explain their real-time analytics dashboard to prospects without requiring a live walkthrough.",process:"Scripted a tight narrative that walks viewers through the key features while keeping things engaging. Combined screen captures with motion graphics overlays to highlight key interactions.",result:"The demo became a core sales enablement asset, used in outreach emails and on the website.",link:null,linkText:null},{title:"Akixi Partner Hub Promo",category:["Video"],image:"https://alanmaudlin.com/wp-content/uploads/2026/01/Akixi-Partner-Hub-Promo.png",description:"Promoting Akixi's partner-facing platform.",client:"Akixi",role:"Video Production, Motion Graphics",brief:"A promotional video to introduce and drive adoption of Akixi's Partner Hub among channel partners.",process:"Combined product UI footage with branded motion graphics to create an engaging walkthrough of the platform's key features and benefits.",result:"Used across partner communications to drive Hub registrations.",link:null,linkText:null},{title:"Mondago Point & Click Adventure",category:["Game Development"],image:"https://alanmaudlin.com/wp-content/uploads/2026/01/Mondago-Point-And-Click-Adventure.png",description:"A gamified onboarding tool built in Unity.",client:"Mondago",role:"Game Design, Illustration, Unity Development",brief:"Mondago needed a way to onboard new starters that was more engaging than a PDF. I pitched a point-and-click adventure game that would teach new hires about the office, the team, and the company culture.",process:"Designed and developed the game in Unity, hand-drawing every environment and character in Illustrator to accurately recreate the real Mondago office and staff. A small team formed around the project — advisory roles, then QA. The game featured dialogue trees, item puzzles, and a speedrun timer.",result:"Deployed for all new starters. Became a genuine talking point during onboarding and an internal morale booster. Graham still holds the speedrun record.",link:"https://mondagopnc.s3.eu-west-2.amazonaws.com/index.html",linkText:"Play the Game"},{title:"Akixi CRM Viewer Redesign",category:["Web Design"],image:"https://alanmaudlin.com/wp-content/uploads/2026/01/Akixi-CRM-Viewer-Mockup-01-Landing-Page-Desktop.png",description:"Rethinking the partner-facing analytics interface.",client:"Akixi",role:"UI/UX Design",brief:"The task was to replace the existing CRM Viewer inherited when Mondago was acquired by Akixi, creating a modern, user-friendly interface.",process:"Redesigned the full interface with a focus on clarity, data hierarchy, and the partner experience. Produced desktop and responsive mockups.",result:"The new design provided a significantly improved user experience for Akixi's partner network.",link:null,linkText:null},{title:"Disc Golf City Teaser Trailer",category:["Game Development","Video"],image:"https://alanmaudlin.com/wp-content/uploads/2026/01/Agapo-DGC-Teaser-Trailer.png",description:"Teaser trailer for an upcoming disc golf game.",client:"Agapo (Personal Project)",role:"Game Design, Video Production, Motion Graphics",brief:"A teaser trailer to build anticipation for Disc Golf City, a game project in development.",process:"Created the full trailer from concept to delivery, combining in-game footage with motion graphics and sound design.",result:"Successfully built early interest and awareness for the game concept.",link:null,linkText:null},{title:"Akixi Video Call Backgrounds",category:["Branding"],image:"https://alanmaudlin.com/wp-content/uploads/2026/01/Akixi-Library01.png",description:"On-brand virtual backgrounds for the team.",client:"Akixi",role:"Graphic Design",brief:"With remote work becoming the norm, Akixi needed branded virtual backgrounds for video calls that felt professional without being dull.",process:"Designed a set of backgrounds using the brand guidelines, creating variety while maintaining consistency across the collection.",result:"Adopted across the company for client-facing and internal calls.",link:null,linkText:null},{title:"CallSights Commsverse Booth Video",category:["Video"],image:"https://alanmaudlin.com/wp-content/uploads/2026/01/CallSights-Commsverse-Booth-2023.png",description:"Trade show booth loop for Commsverse 2023.",client:"CallSights",role:"Video Production, Motion Graphics",brief:"CallSights needed an attention-grabbing booth video for the Commsverse trade show.",process:"Produced a looping video designed to draw attention on the show floor, combining product messaging with dynamic motion graphics.",result:"Ran at the booth throughout Commsverse 2023.",link:null,linkText:null},{title:"Akixi Case Studies",category:["Documentation"],image:"https://alanmaudlin.com/wp-content/uploads/2026/01/ECCR-CaseStudy-Gleadless.png",description:"Designed case study documents for the sales team.",client:"Akixi",role:"Document Design, Layout",brief:"Akixi's sales team needed professional, well-designed case studies to share with prospects.",process:"Designed a flexible case study template and produced multiple finished documents, ensuring consistency with the brand while making each story engaging and easy to scan.",result:"Became core collateral for the sales team's outreach toolkit.",link:null,linkText:null},{title:"Akixi Portraits",category:["Photography"],image:"https://alanmaudlin.com/wp-content/uploads/2026/01/Sales-And-C-Suite-Portraits.png",description:"Professional headshots for the team.",client:"Akixi",role:"Photography, Retouching",brief:"Akixi needed consistent, professional headshots for the sales team and C-suite.",process:"Set up and shot portraits on-site with controlled lighting, then processed and retouched the full set for consistency.",result:"Used across LinkedIn, the company website, and internal communications.",link:null,linkText:null},{title:"Mondago Go Integrator v4 Booth Video",category:["Video"],image:"https://alanmaudlin.com/wp-content/uploads/2026/01/Mondago-Go-Integrator-v4-Booth-Video.png",description:"Trade show video for Go Integrator v4 launch.",client:"Mondago",role:"Video Production, Motion Graphics",brief:"Mondago needed a booth video to promote the launch of Go Integrator version 4 at trade events.",process:"Produced an engaging product-focused video with motion graphics, designed to loop seamlessly on booth displays.",result:"Deployed at multiple trade shows during the v4 launch campaign.",link:null,linkText:null},{title:"How to Demo Akixi for MS Teams",category:["Video"],image:"https://alanmaudlin.com/wp-content/uploads/2026/01/Akixi-How-to-Demo-A4MT.png",description:"Internal training video for the sales team.",client:"Akixi",role:"Scripting, Screen Capture, Editing",brief:"The sales team needed a clear walkthrough of how to demo Akixi's Microsoft Teams integration to prospects.",process:"Scripted and produced an internal training video combining screen captures with clear narration guidance.",result:"Used as a standard training resource for new sales team members.",link:null,linkText:null}];
 
-/* ── BUILD FILTERS ── */
-const allCats = [...new Set(projects.flatMap(p => p.category))].sort();
-const filtersEl = document.getElementById('workFilters');
-const allBtn = document.createElement('button');
-allBtn.className = 'filter-btn active';
-allBtn.textContent = 'All';
-allBtn.dataset.filter = 'all';
-filtersEl.appendChild(allBtn);
-allCats.forEach(cat => {
-  const btn = document.createElement('button');
-  btn.className = 'filter-btn';
-  btn.textContent = cat;
-  btn.dataset.filter = cat;
-  filtersEl.appendChild(btn);
-});
+const allCats=[...new Set(projects.flatMap(p=>p.category))].sort();
+const filtersEl=document.getElementById('workFilters');
+const allBtn=document.createElement('button');allBtn.className='filter-btn active';allBtn.textContent='All';allBtn.dataset.filter='all';filtersEl.appendChild(allBtn);
+allCats.forEach(cat=>{const btn=document.createElement('button');btn.className='filter-btn';btn.textContent=cat;btn.dataset.filter=cat;filtersEl.appendChild(btn)});
 
-/* ── BUILD GRID ── */
-const gridEl = document.getElementById('workGrid');
-function renderGrid(filter = 'all') {
-  gridEl.innerHTML = '';
-  const filtered = filter === 'all' ? projects : projects.filter(p => p.category.includes(filter));
-  filtered.forEach((p, i) => {
-    const card = document.createElement('div');
-    card.className = 'work-card reveal';
-    card.style.transitionDelay = `${Math.min(i * 0.08, 0.4)}s`;
-    card.innerHTML = `
-      <img src="${p.image}" alt="${p.title}" loading="lazy">
-      <div class="work-card-overlay">
-        <div class="work-card-cat">${p.category.join(' · ')}</div>
-        <div class="work-card-title">${p.title}</div>
-        <div class="work-card-desc">${p.description}</div>
-      </div>
-      <div class="work-card-arrow">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="7" y1="17" x2="17" y2="7"></line>
-          <polyline points="7 7 17 7 17 17"></polyline>
-        </svg>
-      </div>
-    `;
-    card.addEventListener('click', () => openModal(p));
-    gridEl.appendChild(card);
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => card.classList.add('visible'));
-    });
-  });
-}
+const gridEl=document.getElementById('workGrid');
+function catClass(c){return'cat-'+c.replace(/\s+/g,'-')}
+function renderGrid(filter='all'){
+gridEl.innerHTML='';
+const filtered=filter==='all'?projects:projects.filter(p=>p.category.includes(filter));
+filtered.forEach((p,i)=>{
+const card=document.createElement('div');card.className='work-card reveal';card.style.transitionDelay=`${Math.min(i*0.07,0.35)}s`;
+const tags=p.category.map(c=>`<span class="work-card-cat-tag ${catClass(c)}">${c}</span>`).join('');
+card.innerHTML=`<img class="work-card-img" src="${p.image}" alt="${p.title}" loading="lazy"><div class="work-card-body"><div class="work-card-cats">${tags}</div><div class="work-card-title">${p.title}</div><div class="work-card-desc">${p.description}</div></div><div class="work-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>`;
+card.addEventListener('click',()=>openModal(p));gridEl.appendChild(card);
+requestAnimationFrame(()=>{requestAnimationFrame(()=>card.classList.add('visible'))});
+});}
 renderGrid();
 
-/* ── FILTER CLICKS ── */
-filtersEl.addEventListener('click', e => {
-  if (!e.target.classList.contains('filter-btn')) return;
-  filtersEl.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  e.target.classList.add('active');
-  renderGrid(e.target.dataset.filter);
-});
+filtersEl.addEventListener('click',e=>{if(!e.target.classList.contains('filter-btn'))return;filtersEl.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));e.target.classList.add('active');renderGrid(e.target.dataset.filter)});
 
-/* ── MODAL ── */
-const modalOverlay = document.getElementById('modal');
-const modalImage = document.getElementById('modalImage');
-const modalCat = document.getElementById('modalCat');
-const modalTitle = document.getElementById('modalTitle');
-const modalMeta = document.getElementById('modalMeta');
-const modalText = document.getElementById('modalText');
-const modalLinkWrap = document.getElementById('modalLinkWrap');
+const modalOverlay=document.getElementById('modal');
+function openModal(p){document.getElementById('modalImage').src=p.image;document.getElementById('modalImage').alt=p.title;document.getElementById('modalCat').textContent=p.category.join(' · ');document.getElementById('modalTitle').textContent=p.title;document.getElementById('modalMeta').innerHTML=`<span><strong>Client:</strong> ${p.client}</span><span><strong>Role:</strong> ${p.role}</span>`;document.getElementById('modalText').innerHTML=`<h4>The Brief</h4><p>${p.brief}</p><h4>What I Did</h4><p>${p.process}</p><h4>The Result</h4><p>${p.result}</p>`;const lw=document.getElementById('modalLinkWrap');lw.innerHTML=p.link?`<a href="${p.link}" target="_blank" rel="noopener" class="modal-link">${p.linkText||'View Project'} ↗</a>`:'';modalOverlay.classList.add('open');document.body.style.overflow='hidden'}
+document.getElementById('modalClose').addEventListener('click',closeModal);
+modalOverlay.addEventListener('click',e=>{if(e.target===modalOverlay)closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+function closeModal(){modalOverlay.classList.remove('open');document.body.style.overflow=''}
 
-function openModal(p) {
-  modalImage.src = p.image;
-  modalImage.alt = p.title;
-  modalCat.textContent = p.category.join(' · ');
-  modalTitle.textContent = p.title;
-  modalMeta.innerHTML = `<span><strong>Client:</strong> ${p.client}</span><span><strong>Role:</strong> ${p.role}</span>`;
-  modalText.innerHTML = `
-    <h4>The Brief</h4><p>${p.brief}</p>
-    <h4>What I Did</h4><p>${p.process}</p>
-    <h4>The Result</h4><p>${p.result}</p>
-  `;
-  if (p.link) {
-    modalLinkWrap.innerHTML = `<a href="${p.link}" target="_blank" rel="noopener" class="modal-link">${p.linkText || 'View Project'} ↗</a>`;
-  } else {
-    modalLinkWrap.innerHTML = '';
-  }
-  modalOverlay.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
+document.getElementById('navToggle').addEventListener('click',()=>{document.getElementById('navLinks').classList.toggle('open')});
+document.querySelectorAll('#navLinks a').forEach(a=>{a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open'))});
 
-document.getElementById('modalClose').addEventListener('click', closeModal);
-modalOverlay.addEventListener('click', e => { if (e.target === modalOverlay) closeModal(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-function closeModal() {
-  modalOverlay.classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-/* ── MOBILE NAV ── */
-const navToggle = document.getElementById('navToggle');
-const navLinks = document.getElementById('navLinks');
-navToggle.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
-});
-navLinks.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => navLinks.classList.remove('open'));
-});
-
-/* ── SCROLL REVEAL ── */
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible')})},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 </script>
 </body>
 </html>
