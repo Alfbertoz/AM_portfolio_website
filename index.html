@@ -144,7 +144,9 @@ body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
 .modal-overlay.open .modal{transform:translateY(0) scale(1)}
 .modal-close{position:sticky;top:1rem;float:right;margin:1rem;width:40px;height:40px;border-radius:50%;background:var(--bg);border:1.5px solid rgba(26,26,46,0.08);color:var(--ink);cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center;font-size:1.1rem;transition:all 0.25s}
 .modal-close:hover{background:var(--pop);color:white;border-color:var(--pop)}
-.modal-image{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius-lg) var(--radius-lg) 0 0}
+.modal-media{width:100%;aspect-ratio:16/9;border-radius:var(--radius-lg) var(--radius-lg) 0 0;overflow:hidden;position:relative;background:#000}
+.modal-media img{width:100%;height:100%;object-fit:cover}
+.modal-media iframe{width:100%;height:100%;position:absolute;inset:0;border:none}
 .modal-body{padding:2rem 2.5rem 2.5rem}
 .modal-cat{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.14em;font-weight:700;color:var(--pop);margin-bottom:0.4rem}
 .modal-title{font-family:var(--font-display);font-weight:900;font-size:1.7rem;color:var(--ink);letter-spacing:-0.02em;margin-bottom:0.5rem}
@@ -166,6 +168,7 @@ body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
 </style>
 </head>
 <body>
+
 <nav class="nav"><div class="nav-inner"><a href="#" class="nav-logo">Alan Maudlin<span class="dot">.</span></a><div class="nav-links" id="navLinks"><a href="#work">Work</a><a href="#services">Services</a><a href="#about">About</a><a href="#contact" class="nav-cta">Get in Touch</a></div><button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
 
 <section class="hero" id="hero">
@@ -235,44 +238,305 @@ body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
 
 <footer class="footer"><div class="footer-inner"><p>&copy; 2026 Alan Maudlin. Based in the UK, working with clients everywhere.</p><div class="footer-links"><a href="mailto:alan@alanmaudlin.com">Email</a><a href="#">LinkedIn</a></div></div></footer>
 
-<div class="modal-overlay" id="modal"><div class="modal"><button class="modal-close" id="modalClose">✕</button><img class="modal-image" id="modalImage" src="" alt=""><div class="modal-body"><div class="modal-cat" id="modalCat"></div><h3 class="modal-title" id="modalTitle"></h3><div class="modal-meta" id="modalMeta"></div><div class="modal-text" id="modalText"></div><div id="modalLinkWrap"></div></div></div></div>
+<div class="modal-overlay" id="modal"><div class="modal"><button class="modal-close" id="modalClose">✕</button><div class="modal-media" id="modalMedia"></div><div class="modal-body"><div class="modal-cat" id="modalCat"></div><h3 class="modal-title" id="modalTitle"></h3><div class="modal-meta" id="modalMeta"></div><div class="modal-text" id="modalText"></div><div id="modalLinkWrap"></div></div></div></div>
 
 <script>
-const projects=[{title:"Akixi 2024 Rebrand Reveal",category:["Branding","Video"],image:"https://alanmaudlin.com/wp-content/uploads/2026/01/Akixi-2024-Rebrand-Reveal.png",description:"Bringing a 15-year-old brand into the present.",client:"Akixi",role:"Art Direction, Animation, Editing",brief:"After 15 years with the same brand identity, Akixi needed a video to introduce their new look internally — something that honoured the company's history while building genuine excitement for the change ahead.",process:"I developed a concept around the passage of time — the old brand literally evolving into the new one through animated transitions. Everything was built to strict adherence to the new brand guidelines, which became both a constraint and a creative challenge.",result:"The video was premiered at the company all-hands and was later adapted into an external-facing version. The creative approach became the template for subsequent brand launch materials.",link:null,linkText:null},{title:"RWS Trailer",category:["Video"],image:"https://alanmaudlin.com/wp-content/uploads/2026/03/RWSTrailer.png",description:"Promotional trailer for RWS.",client:"RWS",role:"Video Production",brief:"RWS needed a compelling promotional trailer to showcase their services and brand identity.",process:"Developed the concept, storyboard, and full production pipeline from scripting through to final delivery.",result:"Delivered a polished trailer that captured the company's brand essence.",link:null,linkText:null},{title:"Samsung Xchange Promo 2018",category:["Video"],image:"https://alanmaudlin.com/wp-content/uploads/2026/03/SamsungXchangePromo2018.png",description:"Promotional video for Samsung's Xchange platform.",client:"Samsung",role:"Video Production, Motion Graphics",brief:"Samsung needed a promo video for their Xchange platform launch.",process:"Produced the full video including motion graphics, editing, and sound design.",result:"Successfully delivered for the platform launch campaign.",link:null,linkText:null},{title:"Akixi Real-Time Demo",category:["Video"],image:"https://alanmaudlin.com/wp-content/uploads/2026/01/Akixi-RealTime-Demo.png",description:"Showing complex software in under two minutes.",client:"Akixi",role:"Scripting, Screen Capture, Editing, Motion Graphics",brief:"Akixi needed a concise product demo that could explain their real-time analytics dashboard to prospects without requiring a live walkthrough.",process:"Scripted a tight narrative that walks viewers through the key features while keeping things engaging. Combined screen captures with motion graphics overlays to highlight key interactions.",result:"The demo became a core sales enablement asset, used in outreach emails and on the website.",link:null,linkText:null},{title:"Akixi Partner Hub Promo",category:["Video"],image:"https://alanmaudlin.com/wp-content/uploads/2026/01/Akixi-Partner-Hub-Promo.png",description:"Promoting Akixi's partner-facing platform.",client:"Akixi",role:"Video Production, Motion Graphics",brief:"A promotional video to introduce and drive adoption of Akixi's Partner Hub among channel partners.",process:"Combined product UI footage with branded motion graphics to create an engaging walkthrough of the platform's key features and benefits.",result:"Used across partner communications to drive Hub registrations.",link:null,linkText:null},{title:"Mondago Point & Click Adventure",category:["Game Development"],image:"https://alanmaudlin.com/wp-content/uploads/2026/01/Mondago-Point-And-Click-Adventure.png",description:"A gamified onboarding tool built in Unity.",client:"Mondago",role:"Game Design, Illustration, Unity Development",brief:"Mondago needed a way to onboard new starters that was more engaging than a PDF. I pitched a point-and-click adventure game that would teach new hires about the office, the team, and the company culture.",process:"Designed and developed the game in Unity, hand-drawing every environment and character in Illustrator to accurately recreate the real Mondago office and staff. A small team formed around the project — advisory roles, then QA. The game featured dialogue trees, item puzzles, and a speedrun timer.",result:"Deployed for all new starters. Became a genuine talking point during onboarding and an internal morale booster. Graham still holds the speedrun record.",link:"https://mondagopnc.s3.eu-west-2.amazonaws.com/index.html",linkText:"Play the Game"},{title:"Akixi CRM Viewer Redesign",category:["Web Design"],image:"https://alanmaudlin.com/wp-content/uploads/2026/01/Akixi-CRM-Viewer-Mockup-01-Landing-Page-Desktop.png",description:"Rethinking the partner-facing analytics interface.",client:"Akixi",role:"UI/UX Design",brief:"The task was to replace the existing CRM Viewer inherited when Mondago was acquired by Akixi, creating a modern, user-friendly interface.",process:"Redesigned the full interface with a focus on clarity, data hierarchy, and the partner experience. Produced desktop and responsive mockups.",result:"The new design provided a significantly improved user experience for Akixi's partner network.",link:null,linkText:null},{title:"Disc Golf City Teaser Trailer",category:["Game Development","Video"],image:"https://alanmaudlin.com/wp-content/uploads/2026/01/Agapo-DGC-Teaser-Trailer.png",description:"Teaser trailer for an upcoming disc golf game.",client:"Agapo (Personal Project)",role:"Game Design, Video Production, Motion Graphics",brief:"A teaser trailer to build anticipation for Disc Golf City, a game project in development.",process:"Created the full trailer from concept to delivery, combining in-game footage with motion graphics and sound design.",result:"Successfully built early interest and awareness for the game concept.",link:null,linkText:null},{title:"Akixi Video Call Backgrounds",category:["Branding"],image:"https://alanmaudlin.com/wp-content/uploads/2026/01/Akixi-Library01.png",description:"On-brand virtual backgrounds for the team.",client:"Akixi",role:"Graphic Design",brief:"With remote work becoming the norm, Akixi needed branded virtual backgrounds for video calls that felt professional without being dull.",process:"Designed a set of backgrounds using the brand guidelines, creating variety while maintaining consistency across the collection.",result:"Adopted across the company for client-facing and internal calls.",link:null,linkText:null},{title:"CallSights Commsverse Booth Video",category:["Video"],image:"https://alanmaudlin.com/wp-content/uploads/2026/01/CallSights-Commsverse-Booth-2023.png",description:"Trade show booth loop for Commsverse 2023.",client:"CallSights",role:"Video Production, Motion Graphics",brief:"CallSights needed an attention-grabbing booth video for the Commsverse trade show.",process:"Produced a looping video designed to draw attention on the show floor, combining product messaging with dynamic motion graphics.",result:"Ran at the booth throughout Commsverse 2023.",link:null,linkText:null},{title:"Akixi Case Studies",category:["Documentation"],image:"https://alanmaudlin.com/wp-content/uploads/2026/01/ECCR-CaseStudy-Gleadless.png",description:"Designed case study documents for the sales team.",client:"Akixi",role:"Document Design, Layout",brief:"Akixi's sales team needed professional, well-designed case studies to share with prospects.",process:"Designed a flexible case study template and produced multiple finished documents, ensuring consistency with the brand while making each story engaging and easy to scan.",result:"Became core collateral for the sales team's outreach toolkit.",link:null,linkText:null},{title:"Akixi Portraits",category:["Photography"],image:"https://alanmaudlin.com/wp-content/uploads/2026/01/Sales-And-C-Suite-Portraits.png",description:"Professional headshots for the team.",client:"Akixi",role:"Photography, Retouching",brief:"Akixi needed consistent, professional headshots for the sales team and C-suite.",process:"Set up and shot portraits on-site with controlled lighting, then processed and retouched the full set for consistency.",result:"Used across LinkedIn, the company website, and internal communications.",link:null,linkText:null},{title:"Mondago Go Integrator v4 Booth Video",category:["Video"],image:"https://alanmaudlin.com/wp-content/uploads/2026/01/Mondago-Go-Integrator-v4-Booth-Video.png",description:"Trade show video for Go Integrator v4 launch.",client:"Mondago",role:"Video Production, Motion Graphics",brief:"Mondago needed a booth video to promote the launch of Go Integrator version 4 at trade events.",process:"Produced an engaging product-focused video with motion graphics, designed to loop seamlessly on booth displays.",result:"Deployed at multiple trade shows during the v4 launch campaign.",link:null,linkText:null},{title:"How to Demo Akixi for MS Teams",category:["Video"],image:"https://alanmaudlin.com/wp-content/uploads/2026/01/Akixi-How-to-Demo-A4MT.png",description:"Internal training video for the sales team.",client:"Akixi",role:"Scripting, Screen Capture, Editing",brief:"The sales team needed a clear walkthrough of how to demo Akixi's Microsoft Teams integration to prospects.",process:"Scripted and produced an internal training video combining screen captures with clear narration guidance.",result:"Used as a standard training resource for new sales team members.",link:null,linkText:null}];
+/* ============================================
+   PROJECT DATA
+   ───────────────────────────────────────────
+   To add a YouTube video to any project, add:
+     video: "https://www.youtube.com/watch?v=YOUR_ID"
+   The modal will show the video instead of the
+   still image and auto-play when opened.
+   ============================================ */
+const projects = [
+  {
+    title: "Akixi 2024 Rebrand Reveal",
+    category: ["Branding", "Video"],
+    image: "https://alanmaudlin.com/wp-content/uploads/2026/01/Akixi-2024-Rebrand-Reveal.png",
+    video: null,
+    description: "Bringing a 15-year-old brand into the present.",
+    client: "Akixi",
+    role: "Art Direction, Animation, Editing",
+    brief: "After 15 years with the same brand identity, Akixi needed a video to introduce their new look internally — something that honoured the company's history while building genuine excitement for the change ahead.",
+    process: "I developed a concept around the passage of time — the old brand literally evolving into the new one through animated transitions. Everything was built to strict adherence to the new brand guidelines, which became both a constraint and a creative challenge.",
+    result: "The video was premiered at the company all-hands and was later adapted into an external-facing version. The creative approach became the template for subsequent brand launch materials.",
+    link: null, linkText: null
+  },
+  {
+    title: "RWS Trailer",
+    category: ["Video"],
+    image: "https://alanmaudlin.com/wp-content/uploads/2026/03/RWSTrailer.png",
+    video: null,
+    description: "Promotional trailer for RWS.",
+    client: "RWS",
+    role: "Video Production",
+    brief: "RWS needed a compelling promotional trailer to showcase their services and brand identity.",
+    process: "Developed the concept, storyboard, and full production pipeline from scripting through to final delivery.",
+    result: "Delivered a polished trailer that captured the company's brand essence.",
+    link: null, linkText: null
+  },
+  {
+    title: "Samsung Xchange Promo 2018",
+    category: ["Video"],
+    image: "https://alanmaudlin.com/wp-content/uploads/2026/03/SamsungXchangePromo2018.png",
+    video: null,
+    description: "Promotional video for Samsung's Xchange platform.",
+    client: "Samsung",
+    role: "Video Production, Motion Graphics",
+    brief: "Samsung needed a promo video for their Xchange platform launch.",
+    process: "Produced the full video including motion graphics, editing, and sound design.",
+    result: "Successfully delivered for the platform launch campaign.",
+    link: null, linkText: null
+  },
+  {
+    title: "Akixi Real-Time Demo",
+    category: ["Video"],
+    image: "https://alanmaudlin.com/wp-content/uploads/2026/01/Akixi-RealTime-Demo.png",
+    video: null,
+    description: "Showing complex software in under two minutes.",
+    client: "Akixi",
+    role: "Scripting, Screen Capture, Editing, Motion Graphics",
+    brief: "Akixi needed a concise product demo that could explain their real-time analytics dashboard to prospects without requiring a live walkthrough.",
+    process: "Scripted a tight narrative that walks viewers through the key features while keeping things engaging. Combined screen captures with motion graphics overlays to highlight key interactions.",
+    result: "The demo became a core sales enablement asset, used in outreach emails and on the website.",
+    link: null, linkText: null
+  },
+  {
+    title: "Akixi Partner Hub Promo",
+    category: ["Video"],
+    image: "https://alanmaudlin.com/wp-content/uploads/2026/01/Akixi-Partner-Hub-Promo.png",
+    video: null,
+    description: "Promoting Akixi's partner-facing platform.",
+    client: "Akixi",
+    role: "Video Production, Motion Graphics",
+    brief: "A promotional video to introduce and drive adoption of Akixi's Partner Hub among channel partners.",
+    process: "Combined product UI footage with branded motion graphics to create an engaging walkthrough of the platform's key features and benefits.",
+    result: "Used across partner communications to drive Hub registrations.",
+    link: null, linkText: null
+  },
+  {
+    title: "Mondago Point & Click Adventure",
+    category: ["Game Development"],
+    image: "https://alanmaudlin.com/wp-content/uploads/2026/01/Mondago-Point-And-Click-Adventure.png",
+    video: null,
+    description: "A gamified onboarding tool built in Unity.",
+    client: "Mondago",
+    role: "Game Design, Illustration, Unity Development",
+    brief: "Mondago needed a way to onboard new starters that was more engaging than a PDF. I pitched a point-and-click adventure game that would teach new hires about the office, the team, and the company culture.",
+    process: "Designed and developed the game in Unity, hand-drawing every environment and character in Illustrator to accurately recreate the real Mondago office and staff. A small team formed around the project — advisory roles, then QA. The game featured dialogue trees, item puzzles, and a speedrun timer.",
+    result: "Deployed for all new starters. Became a genuine talking point during onboarding and an internal morale booster. Graham still holds the speedrun record.",
+    link: "https://mondagopnc.s3.eu-west-2.amazonaws.com/index.html",
+    linkText: "Play the Game"
+  },
+  {
+    title: "Akixi CRM Viewer Redesign",
+    category: ["Web Design"],
+    image: "https://alanmaudlin.com/wp-content/uploads/2026/01/Akixi-CRM-Viewer-Mockup-01-Landing-Page-Desktop.png",
+    video: null,
+    description: "Rethinking the partner-facing analytics interface.",
+    client: "Akixi",
+    role: "UI/UX Design",
+    brief: "The task was to replace the existing CRM Viewer inherited when Mondago was acquired by Akixi, creating a modern, user-friendly interface.",
+    process: "Redesigned the full interface with a focus on clarity, data hierarchy, and the partner experience. Produced desktop and responsive mockups.",
+    result: "The new design provided a significantly improved user experience for Akixi's partner network.",
+    link: null, linkText: null
+  },
+  {
+    title: "Disc Golf City Teaser Trailer",
+    category: ["Game Development", "Video"],
+    image: "https://alanmaudlin.com/wp-content/uploads/2026/01/Agapo-DGC-Teaser-Trailer.png",
+    video: null,
+    description: "Teaser trailer for an upcoming disc golf game.",
+    client: "Agapo (Personal Project)",
+    role: "Game Design, Video Production, Motion Graphics",
+    brief: "A teaser trailer to build anticipation for Disc Golf City, a game project in development.",
+    process: "Created the full trailer from concept to delivery, combining in-game footage with motion graphics and sound design.",
+    result: "Successfully built early interest and awareness for the game concept.",
+    link: null, linkText: null
+  },
+  {
+    title: "Akixi Video Call Backgrounds",
+    category: ["Branding"],
+    image: "https://alanmaudlin.com/wp-content/uploads/2026/01/Akixi-Library01.png",
+    video: null,
+    description: "On-brand virtual backgrounds for the team.",
+    client: "Akixi",
+    role: "Graphic Design",
+    brief: "With remote work becoming the norm, Akixi needed branded virtual backgrounds for video calls that felt professional without being dull.",
+    process: "Designed a set of backgrounds using the brand guidelines, creating variety while maintaining consistency across the collection.",
+    result: "Adopted across the company for client-facing and internal calls.",
+    link: null, linkText: null
+  },
+  {
+    title: "CallSights Commsverse Booth Video",
+    category: ["Video"],
+    image: "https://alanmaudlin.com/wp-content/uploads/2026/01/CallSights-Commsverse-Booth-2023.png",
+    video: null,
+    description: "Trade show booth loop for Commsverse 2023.",
+    client: "CallSights",
+    role: "Video Production, Motion Graphics",
+    brief: "CallSights needed an attention-grabbing booth video for the Commsverse trade show.",
+    process: "Produced a looping video designed to draw attention on the show floor, combining product messaging with dynamic motion graphics.",
+    result: "Ran at the booth throughout Commsverse 2023.",
+    link: null, linkText: null
+  },
+  {
+    title: "Akixi Case Studies",
+    category: ["Documentation"],
+    image: "https://alanmaudlin.com/wp-content/uploads/2026/01/ECCR-CaseStudy-Gleadless.png",
+    video: null,
+    description: "Designed case study documents for the sales team.",
+    client: "Akixi",
+    role: "Document Design, Layout",
+    brief: "Akixi's sales team needed professional, well-designed case studies to share with prospects.",
+    process: "Designed a flexible case study template and produced multiple finished documents, ensuring consistency with the brand while making each story engaging and easy to scan.",
+    result: "Became core collateral for the sales team's outreach toolkit.",
+    link: null, linkText: null
+  },
+  {
+    title: "Akixi Portraits",
+    category: ["Photography"],
+    image: "https://alanmaudlin.com/wp-content/uploads/2026/01/Sales-And-C-Suite-Portraits.png",
+    video: null,
+    description: "Professional headshots for the team.",
+    client: "Akixi",
+    role: "Photography, Retouching",
+    brief: "Akixi needed consistent, professional headshots for the sales team and C-suite.",
+    process: "Set up and shot portraits on-site with controlled lighting, then processed and retouched the full set for consistency.",
+    result: "Used across LinkedIn, the company website, and internal communications.",
+    link: null, linkText: null
+  },
+  {
+    title: "Mondago Go Integrator v4 Booth Video",
+    category: ["Video"],
+    image: "https://alanmaudlin.com/wp-content/uploads/2026/01/Mondago-Go-Integrator-v4-Booth-Video.png",
+    video: null,
+    description: "Trade show video for Go Integrator v4 launch.",
+    client: "Mondago",
+    role: "Video Production, Motion Graphics",
+    brief: "Mondago needed a booth video to promote the launch of Go Integrator version 4 at trade events.",
+    process: "Produced an engaging product-focused video with motion graphics, designed to loop seamlessly on booth displays.",
+    result: "Deployed at multiple trade shows during the v4 launch campaign.",
+    link: null, linkText: null
+  },
+  {
+    title: "How to Demo Akixi for MS Teams",
+    category: ["Video"],
+    image: "https://alanmaudlin.com/wp-content/uploads/2026/01/Akixi-How-to-Demo-A4MT.png",
+    video: null,
+    description: "Internal training video for the sales team.",
+    client: "Akixi",
+    role: "Scripting, Screen Capture, Editing",
+    brief: "The sales team needed a clear walkthrough of how to demo Akixi's Microsoft Teams integration to prospects.",
+    process: "Scripted and produced an internal training video combining screen captures with clear narration guidance.",
+    result: "Used as a standard training resource for new sales team members.",
+    link: null, linkText: null
+  }
+];
 
-const allCats=[...new Set(projects.flatMap(p=>p.category))].sort();
-const filtersEl=document.getElementById('workFilters');
-const allBtn=document.createElement('button');allBtn.className='filter-btn active';allBtn.textContent='All';allBtn.dataset.filter='all';filtersEl.appendChild(allBtn);
-allCats.forEach(cat=>{const btn=document.createElement('button');btn.className='filter-btn';btn.textContent=cat;btn.dataset.filter=cat;filtersEl.appendChild(btn)});
+/* Build filters */
+const allCats = [...new Set(projects.flatMap(p => p.category))].sort();
+const filtersEl = document.getElementById('workFilters');
+const allBtn = document.createElement('button');
+allBtn.className = 'filter-btn active';
+allBtn.textContent = 'All';
+allBtn.dataset.filter = 'all';
+filtersEl.appendChild(allBtn);
+allCats.forEach(cat => {
+  const btn = document.createElement('button');
+  btn.className = 'filter-btn';
+  btn.textContent = cat;
+  btn.dataset.filter = cat;
+  filtersEl.appendChild(btn);
+});
 
-const gridEl=document.getElementById('workGrid');
-function catClass(c){return'cat-'+c.replace(/\s+/g,'-')}
-function renderGrid(filter='all'){
-gridEl.innerHTML='';
-const filtered=filter==='all'?projects:projects.filter(p=>p.category.includes(filter));
-filtered.forEach((p,i)=>{
-const card=document.createElement('div');card.className='work-card reveal';card.style.transitionDelay=`${Math.min(i*0.07,0.35)}s`;
-const tags=p.category.map(c=>`<span class="work-card-cat-tag ${catClass(c)}">${c}</span>`).join('');
-card.innerHTML=`<img class="work-card-img" src="${p.image}" alt="${p.title}" loading="lazy"><div class="work-card-body"><div class="work-card-cats">${tags}</div><div class="work-card-title">${p.title}</div><div class="work-card-desc">${p.description}</div></div><div class="work-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>`;
-card.addEventListener('click',()=>openModal(p));gridEl.appendChild(card);
-requestAnimationFrame(()=>{requestAnimationFrame(()=>card.classList.add('visible'))});
-});}
+/* Build grid */
+const gridEl = document.getElementById('workGrid');
+function catClass(c) { return 'cat-' + c.replace(/\s+/g, '-'); }
+
+function renderGrid(filter) {
+  filter = filter || 'all';
+  gridEl.innerHTML = '';
+  var filtered = filter === 'all' ? projects : projects.filter(function(p) { return p.category.indexOf(filter) !== -1; });
+  filtered.forEach(function(p, i) {
+    var card = document.createElement('div');
+    card.className = 'work-card reveal';
+    card.style.transitionDelay = Math.min(i * 0.07, 0.35) + 's';
+    var tags = p.category.map(function(c) { return '<span class="work-card-cat-tag ' + catClass(c) + '">' + c + '</span>'; }).join('');
+    card.innerHTML = '<img class="work-card-img" src="' + p.image + '" alt="' + p.title + '" loading="lazy"><div class="work-card-body"><div class="work-card-cats">' + tags + '</div><div class="work-card-title">' + p.title + '</div><div class="work-card-desc">' + p.description + '</div></div><div class="work-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>';
+    card.addEventListener('click', function() { openModal(p); });
+    gridEl.appendChild(card);
+    requestAnimationFrame(function() { requestAnimationFrame(function() { card.classList.add('visible'); }); });
+  });
+}
 renderGrid();
 
-filtersEl.addEventListener('click',e=>{if(!e.target.classList.contains('filter-btn'))return;filtersEl.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));e.target.classList.add('active');renderGrid(e.target.dataset.filter)});
+/* Filter clicks */
+filtersEl.addEventListener('click', function(e) {
+  if (!e.target.classList.contains('filter-btn')) return;
+  filtersEl.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+  e.target.classList.add('active');
+  renderGrid(e.target.dataset.filter);
+});
 
-const modalOverlay=document.getElementById('modal');
-function openModal(p){document.getElementById('modalImage').src=p.image;document.getElementById('modalImage').alt=p.title;document.getElementById('modalCat').textContent=p.category.join(' · ');document.getElementById('modalTitle').textContent=p.title;document.getElementById('modalMeta').innerHTML=`<span><strong>Client:</strong> ${p.client}</span><span><strong>Role:</strong> ${p.role}</span>`;document.getElementById('modalText').innerHTML=`<h4>The Brief</h4><p>${p.brief}</p><h4>What I Did</h4><p>${p.process}</p><h4>The Result</h4><p>${p.result}</p>`;const lw=document.getElementById('modalLinkWrap');lw.innerHTML=p.link?`<a href="${p.link}" target="_blank" rel="noopener" class="modal-link">${p.linkText||'View Project'} ↗</a>`:'';modalOverlay.classList.add('open');document.body.style.overflow='hidden'}
-document.getElementById('modalClose').addEventListener('click',closeModal);
-modalOverlay.addEventListener('click',e=>{if(e.target===modalOverlay)closeModal()});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
-function closeModal(){modalOverlay.classList.remove('open');document.body.style.overflow=''}
+/* YouTube ID extractor */
+function ytId(url) {
+  if (!url) return null;
+  var m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?\s]{11})/);
+  return m ? m[1] : null;
+}
 
-document.getElementById('navToggle').addEventListener('click',()=>{document.getElementById('navLinks').classList.toggle('open')});
-document.querySelectorAll('#navLinks a').forEach(a=>{a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open'))});
+/* Modal */
+var modalOverlay = document.getElementById('modal');
+var modalMedia = document.getElementById('modalMedia');
 
-const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible')})},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+function openModal(p) {
+  var vid = ytId(p.video);
+  if (vid) {
+    modalMedia.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + vid + '?autoplay=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+  } else {
+    modalMedia.innerHTML = '<img src="' + p.image + '" alt="' + p.title + '">';
+  }
+  document.getElementById('modalCat').textContent = p.category.join(' \u00b7 ');
+  document.getElementById('modalTitle').textContent = p.title;
+  document.getElementById('modalMeta').innerHTML = '<span><strong>Client:</strong> ' + p.client + '</span><span><strong>Role:</strong> ' + p.role + '</span>';
+  document.getElementById('modalText').innerHTML = '<h4>The Brief</h4><p>' + p.brief + '</p><h4>What I Did</h4><p>' + p.process + '</p><h4>The Result</h4><p>' + p.result + '</p>';
+  var lw = document.getElementById('modalLinkWrap');
+  if (p.link) {
+    lw.innerHTML = '<a href="' + p.link + '" target="_blank" rel="noopener" class="modal-link">' + (p.linkText || 'View Project') + ' \u2197</a>';
+  } else {
+    lw.innerHTML = '';
+  }
+  modalOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+document.getElementById('modalClose').addEventListener('click', closeModal);
+modalOverlay.addEventListener('click', function(e) { if (e.target === modalOverlay) closeModal(); });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+
+function closeModal() {
+  modalMedia.innerHTML = '';
+  modalOverlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* Mobile nav */
+document.getElementById('navToggle').addEventListener('click', function() {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+document.querySelectorAll('#navLinks a').forEach(function(a) {
+  a.addEventListener('click', function() { document.getElementById('navLinks').classList.remove('open'); });
+});
+
+/* Scroll reveal */
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
 </script>
 </body>
 </html>
